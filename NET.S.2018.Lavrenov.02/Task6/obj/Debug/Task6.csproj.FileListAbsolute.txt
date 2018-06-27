@@ -1,0 +1,10 @@
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\bin\Debug\Task6.dll
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\bin\Debug\Task6.pdb
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\bin\Debug\nunit.framework.dll
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\bin\Debug\nunit.framework.pdb
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\bin\Debug\nunit.framework.xml
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\obj\Debug\Task6.csprojResolveAssemblyReference.cache
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\obj\Debug\Task6.csproj.CoreCompileInputs.cache
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\obj\Debug\Task6.csproj.CopyComplete
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\obj\Debug\Task6.dll
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\Task6\obj\Debug\Task6.pdb
