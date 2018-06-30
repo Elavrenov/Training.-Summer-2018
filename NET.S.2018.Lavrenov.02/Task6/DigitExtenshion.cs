@@ -8,12 +8,15 @@ namespace Task6
     /// </summary>
     public static class DigitExtenshion
     {
+        #region Public API
+
         /// <summary>
         /// Filter the array based on the parameter digit
         /// </summary>
-        /// <param name="array">changing array</param>
-        /// <param name="digit">condition digit</param>
-        public static void FilterDigit(ref int[] array,int digit)
+        /// <param name="digit">parameter</param>
+        /// <param name="array">array for filtring</param>
+        /// <returns></returns>
+        public static int[] FilterDigit(int digit, params int[] array)
         {
             if (array==null)
             {
@@ -23,7 +26,9 @@ namespace Task6
             {
                 throw new ArgumentException(nameof(array));
             }
+
             List<int> tempList = new List<int>();
+
             foreach (var item in array)
             {
                 if (IsValidNumber(item,digit))
@@ -33,8 +38,13 @@ namespace Task6
 
             }
 
-            array = tempList.ToArray();
+            return tempList.ToArray();
         }
+
+        #endregion
+
+        #region Private API
+
         /// <summary>
         /// The method returns true if the number contains a digit
         /// </summary>
@@ -56,5 +66,8 @@ namespace Task6
 
             return false;
         }
+
+        #endregion
+        
     }
 }

@@ -1,6 +1,0 @@
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerQuickSort\bin\Debug\IntegerQuickSort.dll
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerQuickSort\bin\Debug\IntegerQuickSort.pdb
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerQuickSort\obj\Debug\IntegerQuickSort.csprojResolveAssemblyReference.cache
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerQuickSort\obj\Debug\IntegerQuickSort.csproj.CoreCompileInputs.cache
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerQuickSort\obj\Debug\IntegerQuickSort.dll
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerQuickSort\obj\Debug\IntegerQuickSort.pdb

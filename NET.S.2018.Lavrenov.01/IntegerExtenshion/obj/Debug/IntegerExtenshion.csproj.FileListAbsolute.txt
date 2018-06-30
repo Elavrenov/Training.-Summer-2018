@@ -1,0 +1,6 @@
+E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.01\IntegerExtenshion\bin\Debug\IntegerExtenshion.dll
+E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.01\IntegerExtenshion\bin\Debug\IntegerExtenshion.pdb
+E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.01\IntegerExtenshion\obj\Debug\IntegerExtenshion.csprojResolveAssemblyReference.cache
+E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.01\IntegerExtenshion\obj\Debug\IntegerExtenshion.csproj.CoreCompileInputs.cache
+E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.01\IntegerExtenshion\obj\Debug\IntegerExtenshion.dll
+E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.01\IntegerExtenshion\obj\Debug\IntegerExtenshion.pdb

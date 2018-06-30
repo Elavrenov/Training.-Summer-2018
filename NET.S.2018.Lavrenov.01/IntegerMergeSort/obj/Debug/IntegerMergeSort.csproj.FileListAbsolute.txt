@@ -1,6 +1,0 @@
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerMergeSort\bin\Debug\IntegerMergeSort.dll
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerMergeSort\bin\Debug\IntegerMergeSort.pdb
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerMergeSort\obj\Debug\IntegerMergeSort.csprojResolveAssemblyReference.cache
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerMergeSort\obj\Debug\IntegerMergeSort.csproj.CoreCompileInputs.cache
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerMergeSort\obj\Debug\IntegerMergeSort.dll
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.01\IntegerMergeSort\obj\Debug\IntegerMergeSort.pdb
