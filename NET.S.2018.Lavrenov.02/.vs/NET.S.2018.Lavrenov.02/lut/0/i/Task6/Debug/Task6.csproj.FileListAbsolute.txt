@@ -1,7 +1,0 @@
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\.vs\NET.S.2018.Lavrenov.02\lut\0\b\Task6\bin\Debug\Task6.dll
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\.vs\NET.S.2018.Lavrenov.02\lut\0\b\Task6\bin\Debug\Task6.pdb
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\.vs\NET.S.2018.Lavrenov.02\lut\0\i\Task6\Debug\Task6.csprojResolveAssemblyReference.cache
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\.vs\NET.S.2018.Lavrenov.02\lut\0\i\Task6\Debug\Task6.csproj.CoreCompileInputs.cache
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\.vs\NET.S.2018.Lavrenov.02\lut\0\i\Task6\Debug\Task6.csproj.CopyComplete
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\.vs\NET.S.2018.Lavrenov.02\lut\0\i\Task6\Debug\Task6.dll
-E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.02\.vs\NET.S.2018.Lavrenov.02\lut\0\i\Task6\Debug\Task6.pdb
