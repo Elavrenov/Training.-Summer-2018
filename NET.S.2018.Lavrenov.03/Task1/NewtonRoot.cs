@@ -18,7 +18,7 @@ namespace Task1
         /// <param name="number">number</param>
         /// <param name="degree">degree</param>
         /// <param name="accuracy">precision</param>
-        /// <returns></returns>
+        /// <returns>The root of the n-power of a number with a given accuracy</returns>
         public static double FindNthRoot(double number, int degree, double accuracy)
         {
             if (degree <= 0)

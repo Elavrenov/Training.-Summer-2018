@@ -14,7 +14,7 @@ namespace Task2
         /// The method for searching GCD(Euclidian algorithm)
         /// </summary>
         /// <param name="numbers">integers</param>
-        /// <returns></returns>
+        /// <returns>GCD of all numbers</returns>
         public static int EuclideanAlgorithm(params int[] numbers)
         {
             for (int i = 0; i < numbers.Length; i++)
@@ -36,7 +36,7 @@ namespace Task2
         /// The method for searching GCD(Binary Euclidian algorithm)
         /// </summary>
         /// <param name="numbers">integers</param>
-        /// <returns></returns>
+        /// <returns>GCD of all numbers</returns>
         public static int BinaryEuclideanAlgorithm(params int[] numbers)
         {
             for (int i = 0; i < numbers.Length; i++)
@@ -53,6 +53,13 @@ namespace Task2
 
             return answer;
         }
+
+        /// <summary>
+        /// Provides an additional opportunity to determine the value
+        /// of the time required to perform a search GCD(Euclidian algorithm)
+        /// </summary>
+        /// <param name="numbers">integers</param>
+        /// <returns>lead time</returns>
         public static TimeSpan GetTimeEuclidianMethod(params int[] numbers)
         {
             Stopwatch timeWorking = new Stopwatch();
@@ -65,6 +72,12 @@ namespace Task2
             return timeWorking.Elapsed;
         }
 
+        /// <summary>
+        /// Provides an additional opportunity to determine the value
+        /// of the time required to perform a search GCD(Binary Euclidian algorithm)
+        /// </summary>
+        /// <param name="numbers">integers</param>
+        /// <returns>lead time</returns>
         public static TimeSpan GetTimeBinaryEuclidianMethod(params int[] numbers)
         {
             Stopwatch timeWorking = new Stopwatch();
@@ -86,7 +99,7 @@ namespace Task2
         /// </summary>
         /// <param name="firstNumber">first number</param>
         /// <param name="secondNumber">second number</param>
-        /// <returns></returns>
+        /// <returns>GCD of 2 elements</returns>
         private static int EuclideanAlgorithm(int firstNumber, int secondNumber)
         {
             while (firstNumber != secondNumber)
@@ -109,7 +122,7 @@ namespace Task2
         /// </summary>
         /// <param name="firstNumber">first number</param>
         /// <param name="secondNumber">second number</param>
-        /// <returns></returns>
+        /// <returns>GCD of 2 elements</returns>
         private static int BinaryEuclideanAlgorithm(int firstNumber, int secondNumber)
         {
             if (firstNumber == secondNumber)
