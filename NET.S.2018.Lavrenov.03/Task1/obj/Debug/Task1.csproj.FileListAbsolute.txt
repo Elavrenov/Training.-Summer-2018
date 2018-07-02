@@ -1,6 +1,6 @@
-E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.03\Task1\bin\Debug\Task1.dll
-E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.03\Task1\bin\Debug\Task1.pdb
-E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.03\Task1\obj\Debug\Task1.csprojResolveAssemblyReference.cache
-E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.03\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
-E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.03\Task1\obj\Debug\Task1.dll
-E:\PROGRAMMING\.Net Summer Training\NET.S.2018.Lavrenov.03\Task1\obj\Debug\Task1.pdb
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.03\Task1\bin\Debug\Task1.dll
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.03\Task1\bin\Debug\Task1.pdb
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.03\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.03\Task1\obj\Debug\Task1.dll
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.03\Task1\obj\Debug\Task1.pdb
+E:\PROGRAMMING\Repository\NET.S.2018.Lavrenov.03\Task1\obj\Debug\Task1.csprojResolveAssemblyReference.cache

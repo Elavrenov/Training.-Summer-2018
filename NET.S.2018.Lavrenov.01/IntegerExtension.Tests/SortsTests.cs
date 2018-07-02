@@ -13,7 +13,7 @@ namespace IntegerExtension.Tests
             int[] testArray = new[] { 3, 2, 1, 0, -5, 4, 4, 5 };
             int[] expected = new[] { -5, 0, 1, 2, 3, 4, 4, 5 };
 
-            MergeSort.Sort(testArray);
+            Sorts.MergeSort(testArray);
 
             CollectionAssert.AreEqual(expected, testArray);
         }
@@ -29,30 +29,30 @@ namespace IntegerExtension.Tests
                 testArray[i] = random.Next(-1000000, 1000000);
             }
 
-            MergeSort.Sort(testArray);
+            Sorts.MergeSort(testArray);
 
-            Assert.IsFalse(!MergeSort.IsDecreasing(testArray));
+            Assert.IsFalse(IsDecreasing(testArray));
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void MergeSort_NullReferense_ThrowsArgumentNullExeption()
         {
             int[] testArray = null;
-            MergeSort.Sort(testArray);
+            Sorts.MergeSort(testArray);
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void MergeSort_LenghtZero_ThrowsArgumentExeption()
         {
             int[] testArray = new int[0];
-            MergeSort.Sort(testArray);
+            Sorts.MergeSort(testArray);
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void MergeSort_LenghtOne_ThrowsArgumentExeption()
         {
             int[] testArray = new int[1];
-            MergeSort.Sort(testArray);
+            Sorts.MergeSort(testArray);
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace IntegerExtension.Tests
             int[] testArray = new[] { 3, 2, 1, 0, -5, 4, 4, 5 };
             int[] expected = new[] { -5, 0, 1, 2, 3, 4, 4, 5 };
 
-            QuickSort.Sort(testArray);
+            Sorts.QuickSort(testArray);
 
             CollectionAssert.AreEqual(expected, testArray);
         }
@@ -77,44 +77,48 @@ namespace IntegerExtension.Tests
                 testArray[i] = random.Next(-1000000, 1000000);
             }
 
-            QuickSort.Sort(testArray);
+            Sorts.QuickSort(testArray);
 
-            Assert.IsFalse(!MergeSort.IsDecreasing(testArray));
-        }
-
-
-        [TestMethod]
-        public void QuickSortOverload_Integers()
-        {
-            int[] testArray = new[] { 3, 2, 1, 0, -5, 4, 4, 5 };
-            int[] expected = new[] { 3, -5, 0, 1, 2, 4, 4, 5 };
-
-            QuickSort.Sort(testArray, 1, 5);
-
-            CollectionAssert.AreEqual(expected, testArray);
+            Assert.IsFalse(IsDecreasing(testArray));
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void QuickSort_NullReferense_ThrowsArgumentNullExeption()
         {
             int[] testArray = null;
-            QuickSort.Sort(testArray);
+            Sorts.QuickSort(testArray);
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void QuickSort_LenghtZero_ThrowsArgumentExeption()
         {
             int[] testArray = new int[0];
-            QuickSort.Sort(testArray);
+            Sorts.QuickSort(testArray);
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void QuickSort_LenghtOne_ThrowsArgumentExeption()
         {
             int[] testArray = new int[1];
-            QuickSort.Sort(testArray);
+            Sorts.QuickSort(testArray);
         }
 
+        /// <summary>
+        /// Check sorted array
+        /// </summary>
+        /// <param name="array">checking array</param>
+        /// <returns></returns>
+        private static bool IsDecreasing(int[] array)
+        {
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                if (array[i] > array[++i])
+                {
+                    break;
+                }
+            }
 
+            return false;
+        }
     }
 }

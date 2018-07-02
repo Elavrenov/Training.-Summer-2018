@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegerExtenshion
 {
     /// <summary>
     /// Class for sorting int arrays
     /// </summary>
-    public static class MergeSort
+    public static class Sorts
     {
         #region Public API
 
@@ -17,40 +13,30 @@ namespace IntegerExtenshion
         /// The method returns a sorted array
         /// </summary>
         /// <param name="arrayForSorting">Array for sorting</param>
-        /// <returns></returns>
-        public static void Sort(int[] arrayForSorting)
+        public static void MergeSort(int[] arrayForSorting)
         {
             IsValidArray(arrayForSorting);
             MergeSortHelper(arrayForSorting, 0, arrayForSorting.Length);
         }
 
         /// <summary>
-        /// Check sorted array
+        /// The method for quick sort
         /// </summary>
-        /// <param name="array">checking array</param>
-        /// <returns></returns>
-        public static bool IsDecreasing(int[] array)
+        /// <param name="sortingArray">array for sorting</param>
+        /// <exception cref="ArgumentNullException">does not exist reference or null</exception>
+        /// <exception cref="ArgumentException">array has no lenght</exception>
+        /// <exception cref="ArgumentException">array has lenght equals 1</exception>
+        public static void QuickSort(int[] sortingArray)
         {
-            for (int i = 0; i < array.Length - 1; i++)
-            {
-                if (array[i] < array[++i])
-                {
-                    continue;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            IsValidArray(sortingArray);
+            QuickSortHelper(sortingArray, 0, sortingArray.Length - 1);
         }
 
         #endregion
 
         #region Private API
 
-         /// <summary>
+        /// <summary>
         /// The method checks the validity of the data
         /// </summary>
         /// <param name="sortingArray">Verifiable array</param>
@@ -138,6 +124,61 @@ namespace IntegerExtenshion
             {
                 tempMas[i] = rightMas[rightIndex];
                 rightIndex++;
+            }
+        }
+
+        /// <summary>
+        /// The method for swap two elements
+        /// </summary>
+        /// <param name="firstElement">first element for swap</param>
+        /// <param name="secondElement">second element for swap</param>
+        private static void Swap(ref int firstElement, ref int secondElement)
+        {
+            int temp;
+            temp = firstElement;
+            firstElement = secondElement;
+            secondElement = temp;
+        }
+
+        /// <summary>
+        /// Recursion method for sorting subarrays
+        /// </summary>
+        /// <param name="subArray">base subarray</param>
+        /// <param name="firstIndex">first index for swap</param>
+        /// <param name="lastIndex">last index for swap</param>
+        private static void QuickSortHelper(int[] subArray, int firstIndex, int lastIndex)
+        {
+            int startIndex = firstIndex;
+            int endIndex = lastIndex;
+            int baseElement = subArray[(firstIndex + lastIndex) / 2];
+
+            while (startIndex <= endIndex)
+            {
+                while (subArray[startIndex] < baseElement)
+                {
+                    startIndex++;
+                }
+
+                while (subArray[endIndex] > baseElement)
+                {
+                    endIndex--;
+                }
+
+                if (startIndex <= endIndex)
+                {
+                    Swap(ref subArray[startIndex++], ref subArray[endIndex--]);
+                }
+
+            }
+
+            if (firstIndex < endIndex)
+            {
+                QuickSortHelper(subArray, firstIndex, endIndex);
+            }
+
+            if (lastIndex > startIndex)
+            {
+                QuickSortHelper(subArray, startIndex, lastIndex);
             }
         }
 

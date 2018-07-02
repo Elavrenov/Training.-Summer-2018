@@ -8,7 +8,12 @@ namespace Task1
     public static class NewtonRoot
     {
         /// <summary>
-        /// Newton method for finding n-degree root
+        /// Newton method for finding n-degree root.
+        /// Return number if degree is 1.
+        /// <exception cref="ArgumentException">degree less or equals 0 </exception>
+        /// <exception cref="ArgumentException">accuracy less or euqals 0</exception>
+        /// <exception cref="ArgumentException">accuracy greater or equels 1</exception>
+        /// <exception cref="ArgumentException">root of even degree from a negative number</exception>
         /// </summary>
         /// <param name="number">number</param>
         /// <param name="degree">degree</param>
@@ -18,17 +23,17 @@ namespace Task1
         {
             if (degree <= 0)
             {
-                throw new ArgumentException(nameof(degree));
+                throw new ArgumentException($"int degree ={nameof(degree)} <=0");
             }
 
-            if (accuracy < 0 || accuracy > 1)
+            if (accuracy <= 0 || accuracy >= 1)
             {
-                throw new ArgumentException(nameof(accuracy));
+                throw new ArgumentException($"int accuracy={nameof(accuracy)} couldn't be <=0 or >=1");
             }
 
             if (number < 0 && degree % 2 == 0)
             {
-                throw new ArgumentException(nameof(number));
+                throw new ArgumentException($"It is impossible to find a root of even degree from a negative number");
             }
 
             if (degree == 1)
