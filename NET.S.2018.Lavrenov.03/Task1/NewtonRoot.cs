@@ -50,7 +50,6 @@ namespace Task1
                 currentApproximation = followingApproximation;
                 followingApproximation = ((degree - 1) * currentApproximation +
                                           number / Math.Pow(currentApproximation, degree - 1)) / degree;
-
             }
 
             return followingApproximation;

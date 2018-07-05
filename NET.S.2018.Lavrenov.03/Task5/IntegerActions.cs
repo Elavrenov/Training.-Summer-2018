@@ -1,4 +1,6 @@
-﻿namespace Task5
+﻿using System;
+
+namespace Task5
 {
     /// <summary>
     /// Сlass extends the possibility of working with integers
@@ -18,6 +20,11 @@
         /// </returns>
         public static int FindNextBiggerNumber(int number)
         {
+            if (number <= 0)
+            {
+                throw new ArgumentException($"{nameof(number)} must be positive");
+            }
+
             if (number == FindCloseBiggerNumber(number, out int endIndex) || number < 0)
             {
                 return -1;

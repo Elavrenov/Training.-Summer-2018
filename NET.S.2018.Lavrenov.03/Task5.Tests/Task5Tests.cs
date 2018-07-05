@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Task5.Tests
 {
@@ -16,11 +17,17 @@ namespace Task5.Tests
         [TestCase(10, ExpectedResult = -1)]
         [TestCase(20, ExpectedResult = -1)]
         [TestCase(209, ExpectedResult = 290)]
-        [TestCase(0, ExpectedResult = -1)]
-        [TestCase(-505, ExpectedResult = -1)]
         public int FindNextBiggerNumber_Integers(int number)
         {
             return IntegerActions.FindNextBiggerNumber(number);
+        }
+
+        [TestCase(-505)]
+        [TestCase(-6)]
+        [TestCase(0)]
+        public void FindNextBiggerNumber_Integers_ArgumentExeption(int number)
+        {
+            Assert.Throws<ArgumentException>(() => IntegerActions.FindNextBiggerNumber(number));
         }
     }
 }
