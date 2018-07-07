@@ -38,22 +38,20 @@ namespace Task1
         {
             StringBuilder exponent = new StringBuilder();
 
-            if (FindIndexOfOne(intPart) != 0)
+            if (FindIndexOfOne(intPart) != -1)
             {
-                return exponent.Append(WholeLongPartToBinary(1023 + (intPart.Length - FindIndexOfOne(intPart) - 1)));
+                return exponent.Append(WholeLongPartToBinary(1023 + intPart.Length - FindIndexOfOne(intPart) - 1));
             }
-            else
-            {
-                return exponent.Append(WholeLongPartToBinary(1023 - FindIndexOfOne(fracPart) - 1));
-            }
+
+            return exponent.Append(WholeLongPartToBinary(1023 - (FindIndexOfOne(fracPart) + 1)));
         }
         private static StringBuilder CreateMantissa(StringBuilder intPart, StringBuilder fracPart)
         {
             StringBuilder mantissa = new StringBuilder();
 
-            if (FindIndexOfOne(fracPart) != 0)
+            if (FindIndexOfOne(fracPart) != -1)
             {
-                for (int i = FindIndexOfOne(intPart); i < intPart.Length; i++)
+                for (int i = FindIndexOfOne(intPart) + 1; i < intPart.Length; i++)
                 {
                     mantissa.Append(intPart[i]);
                 }
@@ -65,7 +63,7 @@ namespace Task1
             }
             else
             {
-                for (int i = FindIndexOfOne(fracPart); i < fracPart.Length; i++)
+                for (int i = FindIndexOfOne(fracPart) + 1; i < fracPart.Length; i++)
                 {
                     mantissa.Append(fracPart[i]);
                 }
@@ -84,7 +82,7 @@ namespace Task1
                 }
             }
 
-            return 0;
+            return -1;
         }
         private static StringBuilder WholeLongPartToBinary(long wholePart)
         {
@@ -112,14 +110,14 @@ namespace Task1
             return newString;
         }
 
-        private static StringBuilder FractionalDoublePartToBinary(double fraction)
+        private static StringBuilder FractionalDoublePartToBinary(double fractionPart)
         {
             StringBuilder bitString = new StringBuilder();
 
             for (int i = 0; i < 52; i++)
             {
-                bitString.Append((int)(fraction * 2) / 1);
-                fraction = (fraction * 2) % 1;
+                bitString.Append((int)(fractionPart * 2) / 1);
+                fractionPart = (fractionPart * 2) % 1;
             }
 
             return bitString;
