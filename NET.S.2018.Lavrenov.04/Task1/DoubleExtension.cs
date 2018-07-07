@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Task1
@@ -8,119 +9,76 @@ namespace Task1
     /// </summary>
     public static class DoubleExtension
     {
+        #region Const
+
+        private const int BitsInByte = 8;
+
+        #endregion
+
         #region public API
+
         /// <summary>
-        /// The method makes it possible to obtain a string representation of a real number
+        /// The method makes it possible to obtain a string representation of a real value
         /// in the format IEEE 754
         /// </summary>
-        /// <param name="number">double number</param>
+        /// <param name="value">double value</param>
         /// <returns>string in IEEE 754</returns>
-        public static string ToIeee754Double(this double number)
+        public static string ToIeee754Double(this double value)
         {
-            long intPart = Math.Abs((long)(number - number % 1));
-            double fracPart = Math.Abs(number % 1);
 
-            StringBuilder intPartStr = WholeLongPartToBinary(intPart);
-            StringBuilder fracPartStr = FractionalDoublePartToBinary(fracPart);
+            var tempStruct = new DoubleToLongStruct(value);
+            long longValue = (long)tempStruct;
 
-            StringBuilder mantissa = CreateMantissa(intPartStr, fracPartStr);
-            StringBuilder exponent = CreateExponent(intPartStr, fracPartStr);
-            StringBuilder answer = new StringBuilder();
-
-            return answer.Append(number > 0 ? 0 : 1).Append(exponent).Append(mantissa).ToString();
+            return longValue.LongToBitString();
         }
 
         #endregion
 
         #region Private API
 
-        private static StringBuilder CreateExponent(StringBuilder intPart, StringBuilder fracPart)
+        [StructLayout(LayoutKind.Explicit)]
+        private struct DoubleToLongStruct
         {
-            StringBuilder exponent = new StringBuilder();
+            [FieldOffset(0)]
+            private readonly long long64bits;
 
-            if (FindIndexOfOne(intPart) != -1)
+            [FieldOffset(0)]
+            private double double64bits;
+
+            public DoubleToLongStruct(double number) : this()
             {
-                return exponent.Append(WholeLongPartToBinary(1023 + intPart.Length - FindIndexOfOne(intPart) - 1));
+                double64bits = number;
             }
 
-            return exponent.Append(WholeLongPartToBinary(1023 - (FindIndexOfOne(fracPart) + 1)));
-        }
-        private static StringBuilder CreateMantissa(StringBuilder intPart, StringBuilder fracPart)
-        {
-            StringBuilder mantissa = new StringBuilder();
-
-            if (FindIndexOfOne(fracPart) != -1)
+            public static explicit operator long(DoubleToLongStruct doubleStruct)
             {
-                for (int i = FindIndexOfOne(intPart) + 1; i < intPart.Length; i++)
-                {
-                    mantissa.Append(intPart[i]);
-                }
-
-                for (int i = 0; i <= 52 - (intPart.Length + FindIndexOfOne(intPart)); i++)
-                {
-                    mantissa.Append(fracPart[i]);
-                }
+                return doubleStruct.long64bits;
             }
-            else
-            {
-                for (int i = FindIndexOfOne(fracPart) + 1; i < fracPart.Length; i++)
-                {
-                    mantissa.Append(fracPart[i]);
-                }
-            }
-
-            return mantissa;
         }
 
-        private static int FindIndexOfOne(StringBuilder someString)
+        private static string LongToBitString(this long value)
         {
-            for (int i = 0; i < someString.Length; i++)
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < BitsInByte * 8; i++)
             {
-                if (someString[i] == '1')
-                {
-                    return i;
-                }
+                sb.Append(value & 1);
+                value >>= 1;
             }
 
-            return -1;
-        }
-        private static StringBuilder WholeLongPartToBinary(long wholePart)
-        {
-            StringBuilder bitString = new StringBuilder();
-            long temp = 0;
-
-            while (wholePart != 0)
-            {
-                temp = wholePart % 2;
-                bitString.Append(temp);
-                wholePart /= 2;
-            }
-
-            return bitString.Reverse();
+            return sb.Reverse().ToString();
         }
 
-        private static StringBuilder Reverse(this StringBuilder sb)
+        public static StringBuilder Reverse(this StringBuilder sb)
         {
-            StringBuilder newString = new StringBuilder(sb.Length);
+            StringBuilder newStringBuilder = new StringBuilder(sb.Length);
+
             for (int i = sb.Length - 1; i >= 0; i--)
             {
-                newString.Append(sb[i]);
+                newStringBuilder.Append(sb[i]);
             }
 
-            return newString;
-        }
-
-        private static StringBuilder FractionalDoublePartToBinary(double fractionPart)
-        {
-            StringBuilder bitString = new StringBuilder();
-
-            for (int i = 0; i < 52; i++)
-            {
-                bitString.Append((int)(fractionPart * 2) / 1);
-                fractionPart = (fractionPart * 2) % 1;
-            }
-
-            return bitString;
+            return newStringBuilder;
         }
 
         #endregion
