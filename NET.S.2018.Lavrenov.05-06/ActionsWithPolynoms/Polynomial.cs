@@ -13,7 +13,7 @@ namespace ActionsWithPolynoms
         /// <summary>
         /// Allowable difference with cofficients
         /// </summary>
-        private const double Accuracy = 0.0000001;
+        private const double Accuracy = 10e-10;
 
         #endregion
 
@@ -21,14 +21,13 @@ namespace ActionsWithPolynoms
 
         /// <summary>
         /// Cofficients array with
-        /// get only acsessor
         /// </summary>
         private readonly double[] _cofficientsArray;
 
         /// <summary>
         /// Maximal polynom degree
         /// </summary>
-        private int Degree { get; }
+        public int Degree => _cofficientsArray.Length - 1;
 
         #endregion
 
@@ -40,7 +39,6 @@ namespace ActionsWithPolynoms
         public Polynomial()
         {
             _cofficientsArray = Array.Empty<double>();
-            Degree = 0;
         }
 
         /// <summary>
@@ -55,8 +53,6 @@ namespace ActionsWithPolynoms
             {
                 _cofficientsArray[i] = cofficients[i];
             }
-
-            Degree = _cofficientsArray.Length - 1;
         }
 
         /// <summary>
@@ -69,10 +65,8 @@ namespace ActionsWithPolynoms
 
             for (int i = 0; i < polynom._cofficientsArray.Length; i++)
             {
-                _cofficientsArray[i] = polynom._cofficientsArray[i];
+                _cofficientsArray[i] = polynom[i];
             }
-
-            Degree = polynom.Degree;
         }
 
         #endregion
@@ -88,25 +82,25 @@ namespace ActionsWithPolynoms
         /// </returns>
         public bool Equals(Polynomial otherPolynom)
         {
-            if (otherPolynom is null)
-            {
-                return false;
-            }
-
             if (ReferenceEquals(this, otherPolynom))
             {
                 return true;
             }
 
+            if (otherPolynom is null)
+            {
+                return false;
+            }
+
             if (GetType() != otherPolynom.GetType()
-                || _cofficientsArray.Length != otherPolynom._cofficientsArray.Length)
+                || Degree != otherPolynom.Degree)
             {
                 return false;
             }
 
             for (int i = 0; i < _cofficientsArray.Length; i++)
             {
-                if (Math.Abs(_cofficientsArray[i] - otherPolynom._cofficientsArray[i]) < Accuracy)
+                if (Math.Abs(_cofficientsArray[i] - otherPolynom._cofficientsArray[i]) > Accuracy)
                 {
                     return false;
                 }
@@ -120,7 +114,7 @@ namespace ActionsWithPolynoms
         /// <summary>
         /// Ovverrided object method
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="obj">some object</param>
         /// <returns>
         /// Equals method for 2 polynomials or false
         /// in the all opposite cases
@@ -142,11 +136,6 @@ namespace ActionsWithPolynoms
                 return false;
             }
 
-            if (GetType() != obj.GetType())
-            {
-                return false;
-            }
-
             return Equals((Polynomial)obj);
         }
 
@@ -159,14 +148,13 @@ namespace ActionsWithPolynoms
         public override int GetHashCode()
         {
             int hashCode = 0;
-            Random rd = new Random();
 
             foreach (var item in _cofficientsArray)
             {
                 hashCode ^= (int)(Degree + item);
             }
 
-            return hashCode + rd.Next(Int32.MaxValue);
+            return hashCode;
         }
 
         /// <summary>
@@ -184,7 +172,6 @@ namespace ActionsWithPolynoms
             }
 
             StringBuilder returnString = new StringBuilder();
-
 
             int n = Degree;
 
@@ -205,36 +192,37 @@ namespace ActionsWithPolynoms
         /// <summary>
         /// Ovverloaded plus operator
         /// </summary>
-        /// <param name="left">The first polynomial</param>
-        /// <param name="right">The second polynomial</param>
+        /// <param name="lhs">The first polynomial</param>
+        /// <param name="rhs">The second polynomial</param>
         /// <returns>Sum of 2 polynomials or one of them (lenght = 0)</returns>
         /// <exception cref="ArgumentException">if one of polynomials is null</exception>
-        public static Polynomial operator +(Polynomial left, Polynomial right)
+        public static Polynomial operator +(Polynomial lhs, Polynomial rhs)
         {
-            if (left is null)
+            if (lhs is null)
             {
-                throw new ArgumentNullException($"{nameof(left)} is null");
+                throw new ArgumentNullException($"{nameof(lhs)} is null");
             }
 
-            if (right is null)
+            if (rhs is null)
             {
-                throw new ArgumentNullException($"{nameof(right)} is null");
+                throw new ArgumentNullException($"{nameof(rhs)} is null");
             }
 
-            if (right._cofficientsArray.Length == 0)
+            if (rhs._cofficientsArray.Length == 0)
             {
-                return left;
+                return lhs;
             }
 
-            if (left._cofficientsArray.Length == 0)
+            if (lhs._cofficientsArray.Length == 0)
             {
-                return right;
+                return rhs;
             }
 
-            return Add(left, right);
+            return Add(lhs, rhs);
         }
 
         /// <summary>
+        ///  
         /// Overloaded - operator
         /// The method changes the signs of the polynomial to opposite
         /// </summary>
@@ -251,7 +239,7 @@ namespace ActionsWithPolynoms
 
             for (int i = 0; i < polynom._cofficientsArray.Length; i++)
             {
-                newCofficients[i] = -polynom._cofficientsArray[i];
+                newCofficients[i] = -polynom[i];
             }
 
             return new Polynomial(newCofficients);
@@ -260,146 +248,181 @@ namespace ActionsWithPolynoms
         /// <summary>
         /// Overloaded substraction operator
         /// </summary>
-        /// <param name="left">First polynomial</param>
-        /// <param name="right">Second polynomial</param>
+        /// <param name="lhs">First polynomial</param>
+        /// <param name="rhs">Second polynomial</param>
         /// <returns>Вifference of 2 polynomials or one of them (lenght = 0)</returns>
         /// <exception cref="ArgumentException">if one of polynomials is null</exception>
-        public static Polynomial operator -(Polynomial left, Polynomial right)
+        public static Polynomial operator -(Polynomial lhs, Polynomial rhs)
         {
 
-            if (left is null)
+            if (lhs is null)
             {
-                throw new ArgumentNullException($"{nameof(left)} is null");
+                throw new ArgumentNullException($"{nameof(lhs)} is null");
             }
 
-            if (left._cofficientsArray.Length == 0)
+            if (rhs is null)
             {
-                return right;
+                throw new ArgumentNullException($"{nameof(rhs)} is null");
             }
 
-            if (right is null)
+            if (lhs._cofficientsArray.Length == 0)
             {
-                throw new ArgumentNullException($"{nameof(right)} is null");
+                return rhs;
             }
 
-            if (right._cofficientsArray.Length == 0)
+            if (rhs._cofficientsArray.Length == 0)
             {
-                return left;
+                return lhs;
             }
 
-            return Add(left, -right);
+            return Add(lhs, -rhs);
         }
 
         /// <summary>
         /// Overloaded multiplication operator
         /// </summary>
-        /// <param name="left">First polynomial</param>
-        /// <param name="right">Second polynomial</param>
+        /// <param name="lhs">First polynomial</param>
+        /// <param name="rhs">Second polynomial</param>
         /// <returns>Product of two polynomials</returns>
         /// <exception cref="ArgumentException">if one of polynomials is null</exception>
-        public static Polynomial operator *(Polynomial left, Polynomial right)
+        public static Polynomial operator *(Polynomial lhs, Polynomial rhs)
         {
-            if (left is null)
+            if (lhs is null)
             {
-                throw new ArgumentNullException($"{nameof(left)} is null");
+                throw new ArgumentNullException($"{nameof(lhs)} is null");
             }
 
-            if (left._cofficientsArray.Length == 0)
+            if (rhs is null)
             {
-                return right;
+                throw new ArgumentNullException($"{nameof(rhs)} is null");
             }
 
-            if (right is null)
+            if (lhs._cofficientsArray.Length == 0)
             {
-                throw new ArgumentNullException($"{nameof(right)} is null");
+                return rhs;
             }
 
-            if (right._cofficientsArray.Length == 0)
+            if (rhs._cofficientsArray.Length == 0)
             {
-                return left;
+                return lhs;
             }
 
-            return Multiply(left, right);
+            return Multiply(lhs, rhs);
+        }
+
+        /// <summary>
+        /// Overloaded multiplication operator
+        /// </summary>
+        /// <param name="lhs">Some polynomial</param>
+        /// <param name="rhs">Some douuble value</param>
+        /// <returns>Product of this terms</returns>
+        /// <exception cref="ArgumentNullException">if polynomial is null</exception>
+        public static Polynomial operator *(Polynomial lhs, double rhs)
+        {
+            if (lhs is null)
+            {
+                throw new ArgumentNullException($"{nameof(lhs)} is null");
+            }
+
+            return Multiply(lhs, new Polynomial(rhs));
+        }
+
+        /// <summary>
+        /// Overloaded multiplication operator
+        /// </summary>
+        /// <param name="lhs">Some polynomial</param>
+        /// <param name="rhs">Some double value</param>
+        /// <returns>Product of this terms</returns>
+        /// <exception cref="ArgumentNullException">if polynomial is null</exception>
+        public static Polynomial operator *(double lhs, Polynomial rhs)
+        {
+            if (rhs is null)
+            {
+                throw new ArgumentNullException($"{nameof(rhs)} is null");
+            }
+
+            return Multiply(rhs, new Polynomial(lhs));
+        }
+
+        /// <summary>
+        /// Overloaded division by double operator
+        /// </summary>
+        /// <param name="lhs">Some polynomial</param>
+        /// <param name="rhs">Some double value</param>
+        /// <returns>Quotient of this terms</returns>
+        /// <exception cref="ArgumentNullException">if polynomial is null</exception>
+        /// <exception cref="DivideByZeroException">if double is zero</exception>
+        public static Polynomial operator /(Polynomial lhs, double rhs)
+        {
+            if (lhs is null)
+            {
+                throw new ArgumentNullException($"{nameof(lhs)} is null");
+            }
+
+            if (rhs - 0 < Accuracy)
+            {
+                throw new DivideByZeroException($"{rhs} zero divisor");
+            }
+
+            return DivideByDouble(lhs, rhs);
         }
 
         /// <summary>
         /// Overloaded == operator
         /// </summary>
-        /// <param name="left">First polynomial</param>
-        /// <param name="right">Second polynomial</param>
+        /// <param name="lhs">First polynomial</param>
+        /// <param name="rhs">Second polynomial</param>
         /// <returns>True if two polynomials are equals and false in another cases</returns>
         /// <exception cref="ArgumentException">if one of polynomials is null</exception>
-        public static bool operator ==(Polynomial left, Polynomial right)
+        public static bool operator ==(Polynomial lhs, Polynomial rhs)
         {
-            if (left is null)
+            if (ReferenceEquals(lhs, rhs))
             {
-                throw new ArgumentNullException($"{nameof(left)} is null");
+                return true;
             }
 
-            if (left._cofficientsArray.Length == 0)
-            {
-                return false;
-            }
-
-            if (right is null)
-            {
-                throw new ArgumentNullException($"{nameof(right)} is null");
-            }
-
-            if (right._cofficientsArray.Length == 0)
+            if (ReferenceEquals(lhs, null))
             {
                 return false;
             }
 
-            for (int i = 0; i < left._cofficientsArray.Length; i++)
+            if (ReferenceEquals(null, rhs))
             {
-                if (Math.Abs(left._cofficientsArray[i] - right._cofficientsArray[i]) > Accuracy)
-                {
-                    return false;
-                }
+                return false;
             }
 
-            return true;
+            return lhs.Equals(rhs);
         }
 
         /// <summary>
         /// Overloaded != operator
         /// </summary>
-        /// <param name="left">Fist polynomial</param>
-        /// <param name="right">Second polynomial</param>
+        /// <param name="lhs">Fist polynomial</param>
+        /// <param name="rhs">Second polynomial</param>
         /// <returns>True if two polynomials are not equals and false in another cases</returns>
         /// <exception cref="ArgumentException">if one of polynomials is null</exception>
-        public static bool operator !=(Polynomial left, Polynomial right)
+        public static bool operator !=(Polynomial lhs, Polynomial rhs)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException($"{nameof(left)} is null");
-            }
+            return !(lhs == rhs);
+        }
 
-            if (left._cofficientsArray.Length == 0)
+        /// <summary>
+        /// Indexer for class Polynomial
+        /// </summary>
+        /// <param name="number">index</param>
+        /// <returns>N-coefficient of polynomial</returns>
+        /// <exception cref="ArgumentOutOfRangeException">If index is not valid</exception>
+        public double this[int number]
+        {
+            get
             {
-                return false;
-            }
-
-            if (right is null)
-            {
-                throw new ArgumentNullException($"{nameof(right)} is null");
-            }
-
-            if (right._cofficientsArray.Length == 0)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < left._cofficientsArray.Length; i++)
-            {
-                if (Math.Abs(left._cofficientsArray[i] - right._cofficientsArray[i]) > Accuracy)
+                if (number < 0 || number > Degree)
                 {
-                    return true;
+                    throw new ArgumentOutOfRangeException($"{number} is not valid index");
                 }
-            }
 
-            return false;
+                return _cofficientsArray[number];
+            }
         }
 
         #endregion
@@ -408,33 +431,21 @@ namespace ActionsWithPolynoms
 
         #region Private API
 
-        private static Polynomial Add(Polynomial left, Polynomial right)
+        private static Polynomial Add(Polynomial lhs, Polynomial rhs)
         {
             double[] newCofficients = new double
-                [Math.Max(left._cofficientsArray.Length, right._cofficientsArray.Length)];
+                [Math.Max(lhs._cofficientsArray.Length, rhs._cofficientsArray.Length)];
 
-            double[] bigArray;
-            double[] littleArray;
-
-            if (left._cofficientsArray.Length >= right._cofficientsArray.Length)
-            {
-                bigArray = left._cofficientsArray;
-                littleArray = right._cofficientsArray;
-            }
-            else
-            {
-                bigArray = right._cofficientsArray;
-                littleArray = left._cofficientsArray;
-            }
+            double[] bigArray = lhs.Degree >= rhs.Degree ? lhs._cofficientsArray : rhs._cofficientsArray;
+            double[] littleArray = lhs.Degree < rhs.Degree ? lhs._cofficientsArray : rhs._cofficientsArray;
 
             int stopIndex = littleArray.Length - 1;
-
 
             for (int i = 0; i < newCofficients.Length; i++)
             {
                 while (i <= stopIndex)
                 {
-                    newCofficients[i] = left._cofficientsArray[i] + right._cofficientsArray[i];
+                    newCofficients[i] = lhs[i] + rhs[i];
                     i++;
                 }
 
@@ -444,17 +455,29 @@ namespace ActionsWithPolynoms
             return new Polynomial(newCofficients);
         }
 
-        private static Polynomial Multiply(Polynomial left, Polynomial right)
+        private static Polynomial Multiply(Polynomial lhs, Polynomial rhs)
         {
 
-            double[] newCofficients = new double[left._cofficientsArray.Length + right._cofficientsArray.Length - 1];
+            double[] newCofficients = new double[lhs._cofficientsArray.Length + rhs._cofficientsArray.Length - 1];
 
-            for (int i = 0; i < left._cofficientsArray.Length; i++)
+            for (int i = 0; i < lhs._cofficientsArray.Length; i++)
             {
-                for (int j = 0; j < right._cofficientsArray.Length; j++)
+                for (int j = 0; j < rhs._cofficientsArray.Length; j++)
                 {
-                    newCofficients[i + j] += left._cofficientsArray[i] * right._cofficientsArray[j];
+                    newCofficients[i + j] += lhs[i] * rhs[j];
                 }
+            }
+
+            return new Polynomial(newCofficients);
+        }
+
+        private static Polynomial DivideByDouble(Polynomial lhs, double rhs)
+        {
+            double[] newCofficients = new double[lhs._cofficientsArray.Length];
+
+            for (int i = 0; i < lhs._cofficientsArray.Length; i++)
+            {
+                newCofficients[i] = lhs[i] / rhs;
             }
 
             return new Polynomial(newCofficients);

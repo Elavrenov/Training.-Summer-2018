@@ -47,6 +47,17 @@ namespace ActionsWithPolynoms.Tests
         [Test]
         public void Polynomial_MultyplyTest()
         {
+            double[] expectedArray = { 8.24, -47, 0, -86 };
+
+            Polynomial actual = FirstPolynomial * 2;
+            Polynomial expected = new Polynomial(expectedArray);
+
+            Assert.AreEqual(actual.ToString(), expected.ToString());
+        }
+
+        [Test]
+        public void Polynomial_MultyplyTest1()
+        {
             double[] expectedArray = { -0.824, 27.772, -82.62144, -270.768, -240.8, -511.184 };
 
             Polynomial actual = FirstPolynomial * SecondPolynomial;
@@ -54,6 +65,29 @@ namespace ActionsWithPolynoms.Tests
 
             Assert.AreEqual(actual.ToString(), expected.ToString());
         }
+
+        [Test]
+        public void Polynomial_MultyplyTest2()
+        {
+            double[] expectedArray = { 8.24, -47, 0, -86 };
+
+            Polynomial actual = 2 * FirstPolynomial;
+            Polynomial expected = new Polynomial(expectedArray);
+
+            Assert.AreEqual(actual.ToString(), expected.ToString());
+        }
+
+        [Test]
+        public void Polynomial_DivisionTest()
+        {
+            double[] expectedArray = { 2.06, -11.75, 0, -21.5 };
+
+            Polynomial actual = FirstPolynomial / 2;
+            Polynomial expected = new Polynomial(expectedArray);
+
+            Assert.AreEqual(actual.ToString(), expected.ToString());
+        }
+
 
         [TestCase(new[] { 1, 1.54, 2, -5, 4, 42.11 }, new[] { 1, 1.54, 2, -5, 4, 42.11 }, ExpectedResult = true)]
         public bool Polynom_EqualsTest1(double[] firstArray, double[] secondArray)
@@ -64,7 +98,7 @@ namespace ActionsWithPolynoms.Tests
             return left == right;
         }
 
-        [TestCase(new[] { 1, 1.54, 2, -5, 4, 42.11 }, new[] { 1, 1.54, 2, -5, 4, 42.11 }, ExpectedResult = false)]
+        [TestCase(new[] { 1, 1.54, 2, -5, 4, 42.11 }, new[] { 1, 1.54, 2, -5, 4, 42.11 }, ExpectedResult = true)]
         public bool Polynom_EqualsTest2(double[] firstArray, double[] secondArray)
         {
             Polynomial left = new Polynomial(firstArray);
