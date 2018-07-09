@@ -3,6 +3,9 @@ using System.Text;
 
 namespace ActionsWithPolynoms
 {
+    /// <summary>
+    /// Class for working with polynomials
+    /// </summary>
     public sealed class Polynomial
     {
         #region Const
@@ -10,7 +13,7 @@ namespace ActionsWithPolynoms
         /// <summary>
         /// Allowable difference with cofficients
         /// </summary>
-        private const double Accuracy = 0.001;
+        private const double Accuracy = 0.0000001;
 
         #endregion
 
@@ -20,7 +23,7 @@ namespace ActionsWithPolynoms
         /// Cofficients array with
         /// get only acsessor
         /// </summary>
-        private double[] CofficientsArray { get; }
+        private readonly double[] _cofficientsArray;
 
         /// <summary>
         /// Maximal polynom degree
@@ -36,7 +39,7 @@ namespace ActionsWithPolynoms
         /// </summary>
         public Polynomial()
         {
-            CofficientsArray = Array.Empty<double>();
+            _cofficientsArray = Array.Empty<double>();
             Degree = 0;
         }
 
@@ -46,14 +49,14 @@ namespace ActionsWithPolynoms
         /// <param name="cofficients"></param>
         public Polynomial(params double[] cofficients)
         {
-            CofficientsArray = new double[cofficients.Length];
+            _cofficientsArray = new double[cofficients.Length];
 
             for (int i = 0; i < cofficients.Length; i++)
             {
-                CofficientsArray[i] = cofficients[i];
+                _cofficientsArray[i] = cofficients[i];
             }
 
-            Degree = CofficientsArray.Length - 1;
+            Degree = _cofficientsArray.Length - 1;
         }
 
         /// <summary>
@@ -62,11 +65,11 @@ namespace ActionsWithPolynoms
         /// <param name="polynom"></param>
         public Polynomial(Polynomial polynom)
         {
-            CofficientsArray = new double[polynom.CofficientsArray.Length];
+            _cofficientsArray = new double[polynom._cofficientsArray.Length];
 
-            for (int i = 0; i < polynom.CofficientsArray.Length; i++)
+            for (int i = 0; i < polynom._cofficientsArray.Length; i++)
             {
-                CofficientsArray[i] = polynom.CofficientsArray[i];
+                _cofficientsArray[i] = polynom._cofficientsArray[i];
             }
 
             Degree = polynom.Degree;
@@ -96,14 +99,14 @@ namespace ActionsWithPolynoms
             }
 
             if (GetType() != otherPolynom.GetType()
-                || CofficientsArray.Length != otherPolynom.CofficientsArray.Length)
+                || _cofficientsArray.Length != otherPolynom._cofficientsArray.Length)
             {
                 return false;
             }
 
-            for (int i = 0; i < CofficientsArray.Length; i++)
+            for (int i = 0; i < _cofficientsArray.Length; i++)
             {
-                if (CofficientsArray[i] - otherPolynom.CofficientsArray[i] < Accuracy)
+                if (Math.Abs(_cofficientsArray[i] - otherPolynom._cofficientsArray[i]) < Accuracy)
                 {
                     return false;
                 }
@@ -158,7 +161,7 @@ namespace ActionsWithPolynoms
             int hashCode = 0;
             Random rd = new Random();
 
-            foreach (var item in CofficientsArray)
+            foreach (var item in _cofficientsArray)
             {
                 hashCode ^= (int)(Degree + item);
             }
@@ -175,9 +178,9 @@ namespace ActionsWithPolynoms
         /// <exception cref="ArgumentNullException">if Cofficients Array is null</exception>
         public override string ToString()
         {
-            if (CofficientsArray is null)
+            if (_cofficientsArray is null)
             {
-                throw new ArgumentNullException($"{nameof(CofficientsArray)} is null");
+                throw new ArgumentNullException($"{nameof(_cofficientsArray)} is null");
             }
 
             StringBuilder returnString = new StringBuilder();
@@ -185,12 +188,12 @@ namespace ActionsWithPolynoms
 
             int n = Degree;
 
-            for (int i = 0; i < CofficientsArray.Length - 1; i++, n--)
+            for (int i = 0; i < _cofficientsArray.Length - 1; i++, n--)
             {
-                returnString.Append($"({CofficientsArray[i]})x^{n} + ");
+                returnString.Append($"({_cofficientsArray[i]})x^{n} + ");
             }
 
-            returnString.Append($"({CofficientsArray[CofficientsArray.Length - 1]})");
+            returnString.Append($"({_cofficientsArray[_cofficientsArray.Length - 1]})");
 
             return returnString.ToString();
         }
@@ -218,12 +221,12 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(right)} is null");
             }
 
-            if (right.CofficientsArray.Length == 0)
+            if (right._cofficientsArray.Length == 0)
             {
                 return left;
             }
 
-            if (left.CofficientsArray.Length == 0)
+            if (left._cofficientsArray.Length == 0)
             {
                 return right;
             }
@@ -244,11 +247,11 @@ namespace ActionsWithPolynoms
                 throw new ArgumentException($"{nameof(polynom)} is null");
             }
 
-            double[] newCofficients = new double[polynom.CofficientsArray.Length];
+            double[] newCofficients = new double[polynom._cofficientsArray.Length];
 
-            for (int i = 0; i < polynom.CofficientsArray.Length; i++)
+            for (int i = 0; i < polynom._cofficientsArray.Length; i++)
             {
-                newCofficients[i] = -polynom.CofficientsArray[i];
+                newCofficients[i] = -polynom._cofficientsArray[i];
             }
 
             return new Polynomial(newCofficients);
@@ -269,7 +272,7 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(left)} is null");
             }
 
-            if (left.CofficientsArray.Length == 0)
+            if (left._cofficientsArray.Length == 0)
             {
                 return right;
             }
@@ -279,7 +282,7 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(right)} is null");
             }
 
-            if (right.CofficientsArray.Length == 0)
+            if (right._cofficientsArray.Length == 0)
             {
                 return left;
             }
@@ -301,7 +304,7 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(left)} is null");
             }
 
-            if (left.CofficientsArray.Length == 0)
+            if (left._cofficientsArray.Length == 0)
             {
                 return right;
             }
@@ -311,7 +314,7 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(right)} is null");
             }
 
-            if (right.CofficientsArray.Length == 0)
+            if (right._cofficientsArray.Length == 0)
             {
                 return left;
             }
@@ -333,7 +336,7 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(left)} is null");
             }
 
-            if (left.CofficientsArray.Length == 0)
+            if (left._cofficientsArray.Length == 0)
             {
                 return false;
             }
@@ -343,14 +346,14 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(right)} is null");
             }
 
-            if (right.CofficientsArray.Length == 0)
+            if (right._cofficientsArray.Length == 0)
             {
                 return false;
             }
 
-            for (int i = 0; i < left.CofficientsArray.Length; i++)
+            for (int i = 0; i < left._cofficientsArray.Length; i++)
             {
-                if (left.CofficientsArray[i] - right.CofficientsArray[i] > Accuracy)
+                if (Math.Abs(left._cofficientsArray[i] - right._cofficientsArray[i]) > Accuracy)
                 {
                     return false;
                 }
@@ -373,7 +376,7 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(left)} is null");
             }
 
-            if (left.CofficientsArray.Length == 0)
+            if (left._cofficientsArray.Length == 0)
             {
                 return false;
             }
@@ -383,14 +386,14 @@ namespace ActionsWithPolynoms
                 throw new ArgumentNullException($"{nameof(right)} is null");
             }
 
-            if (right.CofficientsArray.Length == 0)
+            if (right._cofficientsArray.Length == 0)
             {
                 return false;
             }
 
-            for (int i = 0; i < left.CofficientsArray.Length; i++)
+            for (int i = 0; i < left._cofficientsArray.Length; i++)
             {
-                if (left.CofficientsArray[i] - right.CofficientsArray[i] > Accuracy)
+                if (Math.Abs(left._cofficientsArray[i] - right._cofficientsArray[i]) > Accuracy)
                 {
                     return true;
                 }
@@ -408,20 +411,20 @@ namespace ActionsWithPolynoms
         private static Polynomial Add(Polynomial left, Polynomial right)
         {
             double[] newCofficients = new double
-                [Math.Max(left.CofficientsArray.Length, right.CofficientsArray.Length)];
+                [Math.Max(left._cofficientsArray.Length, right._cofficientsArray.Length)];
 
             double[] bigArray;
             double[] littleArray;
 
-            if (left.CofficientsArray.Length >= right.CofficientsArray.Length)
+            if (left._cofficientsArray.Length >= right._cofficientsArray.Length)
             {
-                bigArray = left.CofficientsArray;
-                littleArray = right.CofficientsArray;
+                bigArray = left._cofficientsArray;
+                littleArray = right._cofficientsArray;
             }
             else
             {
-                bigArray = right.CofficientsArray;
-                littleArray = left.CofficientsArray;
+                bigArray = right._cofficientsArray;
+                littleArray = left._cofficientsArray;
             }
 
             int stopIndex = littleArray.Length - 1;
@@ -431,7 +434,7 @@ namespace ActionsWithPolynoms
             {
                 while (i <= stopIndex)
                 {
-                    newCofficients[i] = left.CofficientsArray[i] + right.CofficientsArray[i];
+                    newCofficients[i] = left._cofficientsArray[i] + right._cofficientsArray[i];
                     i++;
                 }
 
@@ -444,13 +447,13 @@ namespace ActionsWithPolynoms
         private static Polynomial Multiply(Polynomial left, Polynomial right)
         {
 
-            double[] newCofficients = new double[left.CofficientsArray.Length + right.CofficientsArray.Length - 1];
+            double[] newCofficients = new double[left._cofficientsArray.Length + right._cofficientsArray.Length - 1];
 
-            for (int i = 0; i < left.CofficientsArray.Length; i++)
+            for (int i = 0; i < left._cofficientsArray.Length; i++)
             {
-                for (int j = 0; j < right.CofficientsArray.Length; j++)
+                for (int j = 0; j < right._cofficientsArray.Length; j++)
                 {
-                    newCofficients[i + j] += left.CofficientsArray[i] * right.CofficientsArray[j];
+                    newCofficients[i + j] += left._cofficientsArray[i] * right._cofficientsArray[j];
                 }
             }
 
