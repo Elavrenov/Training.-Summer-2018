@@ -51,7 +51,7 @@
 
         #region Prop
         /// <summary>
-        /// Property for name
+        /// Property for <see cref="_name"/>
         /// </summary>
         /// <exception cref="ArgumentException">name must be in valid format</exception>
         public string Name
@@ -72,7 +72,7 @@
         }
 
         /// <summary>
-        /// Property for phone
+        /// Property for <see cref="_contactPhone"/>
         /// </summary>
         /// <exception cref="ArgumentException">phone must be in valid format</exception>
         public string ContactPhone
@@ -93,7 +93,7 @@
         }
 
         /// <summary>
-        /// Property for revenue
+        /// Property for <see cref="_revenue"/>
         /// </summary>
         /// <exception cref="ArgumentException">if value less than 0</exception>
         public decimal Revenue
