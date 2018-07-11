@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace ActionsWithPolynoms
@@ -6,7 +7,7 @@ namespace ActionsWithPolynoms
     /// <summary>
     /// Class for working with polynomials
     /// </summary>
-    public sealed class Polynomial
+    public sealed class Polynomial : IEquatable<Polynomial>, ICloneable
     {
         #region Const
 
@@ -73,6 +74,8 @@ namespace ActionsWithPolynoms
 
         #region Public API
 
+        #region IEuqatable
+
         /// <summary>
         /// The method compares two polynomials with each other
         /// </summary>
@@ -109,8 +112,6 @@ namespace ActionsWithPolynoms
             return true;
         }
 
-        #region Overrided object methods
-
         /// <summary>
         /// Ovverrided object method
         /// </summary>
@@ -139,6 +140,31 @@ namespace ActionsWithPolynoms
             return Equals((Polynomial)obj);
         }
 
+        #endregion
+
+        #region ICloneable
+
+        /// <summary>
+        /// Create polynomial clone
+        /// </summary>
+        /// <returns>clone of this polynomial</returns>
+        /// <inheritdoc cref="object"/>
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
+
+        /// <summary>
+        /// Create polynomial clone
+        /// </summary>
+        /// <returns>clone of this polynomial</returns>
+        public Polynomial Clone()
+        {
+            return new Polynomial(_cofficientsArray);
+        }
+
+        #region Overrided object methods
+
         /// <summary>
         /// Overrided object method
         /// </summary>
@@ -156,6 +182,8 @@ namespace ActionsWithPolynoms
 
             return hashCode;
         }
+
+        #endregion
 
         /// <summary>
         /// Overrided object method
@@ -409,19 +437,28 @@ namespace ActionsWithPolynoms
         /// <summary>
         /// Indexer for class Polynomial
         /// </summary>
-        /// <param name="number">index</param>
+        /// <param name="index">index</param>
         /// <returns>N-coefficient of polynomial</returns>
         /// <exception cref="ArgumentOutOfRangeException">If index is not valid</exception>
-        public double this[int number]
+        public double this[int index]
         {
             get
             {
-                if (number < 0 || number > Degree)
+                if (index < 0 || index > Degree)
                 {
-                    throw new ArgumentOutOfRangeException($"{number} is not valid index");
+                    throw new ArgumentOutOfRangeException($"{index} is not valid index");
                 }
 
-                return _cofficientsArray[number];
+                return _cofficientsArray[index];
+            }
+            private set
+            {
+                if (index < 0 || index > Degree)
+                {
+                    throw new ArgumentOutOfRangeException($"{index} is not valid index");
+                }
+
+                _cofficientsArray[index] = value;
             }
         }
 
