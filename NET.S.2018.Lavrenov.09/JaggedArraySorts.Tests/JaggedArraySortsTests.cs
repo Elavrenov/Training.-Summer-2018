@@ -47,6 +47,29 @@
 
             CollectionAssert.AreEqual(expectedArray, actualArray);
         }
+
+        [Test]
+        public void BubbleSort_IncreasingRowSumsTestWithIntMaxValue()
+        {
+            int[][] actualArray = new int[][]
+            {
+                new int[] {1,22,0,3,-5,7,-9,int.MinValue},
+                new int[] {0,24,6,-5,int.MaxValue},
+                null
+            };
+
+            int[][] expectedArray = new int[][]
+            {
+                null,
+                new int[] {1,22,0,3,-5,7,-9,int.MinValue},
+                new int[] {0,24,6,-5,int.MaxValue},
+            };
+
+            actualArray.BubbleSort(new IncSumComparer());
+
+            CollectionAssert.AreEqual(expectedArray, actualArray);
+        }
+
         [Test]
         public void BubbleSort_DecreasingRowSumsTest()
         {
@@ -149,6 +172,28 @@
             {
                 new int[] {0,24,6,-5},
                 new int[] {1,22,0,3,-5,7,-9},
+                null
+            };
+
+            actualArray.BubbleSort(new DecMinItemComparer());
+
+            CollectionAssert.AreEqual(expectedArray, actualArray);
+        }
+
+        [Test]
+        public void BubbleSort_DecreasingMinItemTestWithIntMaxValue()
+        {
+            int[][] actualArray = new int[][]
+            {
+                new int[] {1,22,0,3,-5,7,-9,int.MinValue},
+                null,
+                new int[] {0,24,6,-5,int.MaxValue}
+            };
+
+            int[][] expectedArray = new int[][]
+            {
+                new int[] {0,24,6,-5,int.MaxValue},
+                new int[] {1,22,0,3,-5,7,-9,int.MinValue},
                 null
             };
 

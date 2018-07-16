@@ -1,6 +1,7 @@
-﻿namespace JaggedArraySorts
+﻿namespace JaggedArraySorts.Tests
 {
     using System.Collections.Generic;
+    using System;
 
     /// <summary>
     /// Sealed conditional class with compare logic
@@ -21,32 +22,58 @@
         /// </returns>
         public int Compare(int[] x, int[] y)
         {
-            if (x is null && y is null)
+            if (x == null && y == null)
             {
                 return 0;
             }
 
-            if (x is null)
+            if (x == null)
             {
                 return -1;
             }
 
-            if (y is null)
+            if (y == null)
             {
                 return 1;
             }
 
-            if (x.MaxElement() > y.MaxElement())
+            if (MaxElement(x) > MaxElement(y))
             {
                 return 1;
             }
 
-            if (x.MaxElement() < y.MaxElement())
+            if (MaxElement(x) < MaxElement(y))
             {
                 return -1;
             }
 
             return 0;
+        }
+
+        /// <summary>
+        /// The method finds maximal array element
+        /// </summary>
+        /// <param name="array"> Array </param>
+        /// <returns>Maximal element in given array</returns>
+        /// <exception cref="ArgumentNullException">if array is null</exception>
+        public static int MaxElement(int[] array)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be null");
+            }
+
+            int max = array[0];
+
+            foreach (var item in array)
+            {
+                if (max < item)
+                {
+                    max = item;
+                }
+            }
+
+            return max;
         }
     }
 }

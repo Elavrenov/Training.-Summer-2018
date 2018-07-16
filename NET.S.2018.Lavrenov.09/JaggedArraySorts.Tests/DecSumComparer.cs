@@ -1,6 +1,7 @@
-﻿namespace JaggedArraySorts
+﻿namespace JaggedArraySorts.Tests
 {
     using System.Collections.Generic;
+    using System;
 
     /// <summary>
     /// Sealed conditional class with compare logic
@@ -21,32 +22,55 @@
         /// </returns>
         public int Compare(int[] x, int[] y)
         {
-            if (x is null && y is null)
+            if (x == null && y == null)
             {
                 return 0;
             }
 
-            if (x is null)
+            if (x == null)
             {
                 return 1;
             }
 
-            if (y is null)
+            if (y == null)
             {
                 return -1;
             }
 
-            if (x.RowSum() < y.RowSum())
+            if (RowSum(x) < RowSum(y))
             {
                 return 1;
             }
 
-            if (x.RowSum() > y.RowSum())
+            if (RowSum(x) > RowSum(y))
             {
                 return -1;
             }
 
             return 0;
+        }
+
+        /// <summary>
+        /// The method finds sum of array elements
+        /// </summary>
+        /// <param name="array"> Array </param>
+        /// <returns>Sum of array elements</returns>
+        /// <exception cref="ArgumentNullException">if array is null</exception>
+        public static int RowSum(int[] array)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be null");
+            }
+
+            int sum = 0;
+
+            foreach (var item in array)
+            {
+                sum += item;
+            }
+
+            return sum;
         }
     }
 }

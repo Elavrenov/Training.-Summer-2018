@@ -52,6 +52,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DecMaxItemComparer.cs" />
+    <Compile Include="DecMinItemComparer.cs" />
+    <Compile Include="DecSumComparer.cs" />
+    <Compile Include="IncMaxItemComparer.cs" />
+    <Compile Include="IncMinItemComparer.cs" />
+    <Compile Include="IncSumComparer.cs" />
     <Compile Include="JaggedArraySortsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

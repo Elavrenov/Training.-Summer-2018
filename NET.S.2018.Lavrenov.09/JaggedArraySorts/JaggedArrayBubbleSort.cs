@@ -32,94 +32,28 @@
 
             for (int i = 0; i < array.GetLength(0); i++)
             {
+                var isChanged = false;
+
                 for (int j = 0; j < array.GetLength(0) - 1; j++)
                 {
-                    if (condition.Compare(array[j], array[j + 1]) == 1)
+                    if (condition.Compare(array[j], array[j + 1]) > 0)
                     {
                         Swap(ref array[j], ref array[j + 1]);
+                        isChanged = true;
                     }
                 }
-            }
-        }
 
-        /// <summary>
-        /// The method finds sum of array elements
-        /// </summary>
-        /// <param name="array"> Array </param>
-        /// <returns>Sum of array elements</returns>
-        /// <exception cref="ArgumentNullException">if array is null</exception>
-        public static int RowSum(this int[] array)
-        {
-            if (array is null)
-            {
-                throw new ArgumentNullException($"{nameof(array)} can't be null");
-            }
-
-            int sum = 0;
-
-            foreach (var item in array)
-            {
-                sum += item;
-            }
-
-            return sum;
-        }
-
-        /// <summary>
-        /// The method finds maximal array element
-        /// </summary>
-        /// <param name="array"> Array </param>
-        /// <returns>Maximal element in given array</returns>
-        /// <exception cref="ArgumentNullException">if array is null</exception>
-        public static int MaxElement(this int[] array)
-        {
-            if (array is null)
-            {
-                throw new ArgumentNullException($"{nameof(array)} can't be null");
-            }
-
-            int max = array[0];
-
-            foreach (var item in array)
-            {
-                if (max < item)
+                if (!isChanged)
                 {
-                    max = item;
+                    return;
                 }
             }
-
-            return max;
-        }
-
-        /// <summary>
-        /// The method finds minimal array element
-        /// </summary>
-        /// <param name="array"> Array </param>
-        /// <returns>Minimal element in given array</returns>
-        /// <exception cref="ArgumentNullException">if array is null</exception>
-        public static int MinElement(this int[] array)
-        {
-            if (array is null)
-            {
-                throw new ArgumentNullException($"{nameof(array)} can't be null");
-            }
-
-            int min = array[0];
-
-            foreach (var item in array)
-            {
-                if (min > item)
-                {
-                    min = item;
-                }
-            }
-
-            return min;
         }
 
         #endregion
 
         #region Private API
+
         private static void Swap(ref int[] firstRow, ref int[] secondRow)
         {
             int[] temp = firstRow;

@@ -1,6 +1,7 @@
-﻿namespace JaggedArraySorts
+﻿namespace JaggedArraySorts.Tests
 {
     using System.Collections.Generic;
+    using System;
 
     /// <summary>
     /// Sealed conditional class with compare logic
@@ -21,32 +22,58 @@
         /// </returns>
         public int Compare(int[] x, int[] y)
         {
-            if (x is null && y is null)
+            if (x == null && y == null)
             {
                 return 0;
             }
 
-            if (x is null)
+            if (x == null)
             {
                 return -1;
             }
 
-            if (y is null)
+            if (y == null)
             {
                 return 1;
             }
 
-            if (x.MinElement() > y.MinElement())
+            if (MinElement(x) > MinElement(y))
             {
                 return 1;
             }
 
-            if (x.MinElement() < y.MinElement())
+            if (MinElement(x) < MinElement(y))
             {
                 return -1;
             }
 
             return 0;
+        }
+
+        /// <summary>
+        /// The method finds minimal array element
+        /// </summary>
+        /// <param name="array"> Array </param>
+        /// <returns>Minimal element in given array</returns>
+        /// <exception cref="ArgumentNullException">if array is null</exception>
+        public static int MinElement(int[] array)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be null");
+            }
+
+            int min = array[0];
+
+            foreach (var item in array)
+            {
+                if (min > item)
+                {
+                    min = item;
+                }
+            }
+
+            return min;
         }
     }
 }
