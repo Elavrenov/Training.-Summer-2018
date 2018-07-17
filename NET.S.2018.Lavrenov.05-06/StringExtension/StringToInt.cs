@@ -27,22 +27,18 @@ namespace StringExtension
                 throw new ArgumentException($"{nameof(notation)} must be in segment [2,16]");
             }
 
-            if (notation == 2 && value.Length > 32)
-            {
-                throw new OverflowException($"{nameof(value)} wrong format");
-            }
-
             int[] valueArray = value.StringToArray(notation);
             int answer = 0;
+            int n = 1;
 
-            for (int i = valueArray.Length - 1, n = 0; i >= 0; i--)
+            for (int i = valueArray.Length - 1; i >= 0; i--)
             {
-                answer += valueArray[i] * (int)Math.Pow(notation, n++);
-            }
+                checked
+                {
+                    answer += valueArray[i] * n;
+                    n *= notation;
+                }
 
-            if (answer < 0)
-            {
-                throw new OverflowException("Wrong format");
             }
 
             return answer;
