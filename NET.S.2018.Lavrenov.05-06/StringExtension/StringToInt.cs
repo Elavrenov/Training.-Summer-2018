@@ -22,6 +22,11 @@ namespace StringExtension
         /// <exception cref="OverflowException">for notation equals 2 value can't be greater than 32</exception>
         public static int ConvertToInt32(this string value, int notation)
         {
+            if (value == null)
+            {
+                throw new ArgumentException($"{nameof(value)} can't be null");
+            }
+
             if (notation < 2 || notation > 16)
             {
                 throw new ArgumentException($"{nameof(notation)} must be in segment [2,16]");
