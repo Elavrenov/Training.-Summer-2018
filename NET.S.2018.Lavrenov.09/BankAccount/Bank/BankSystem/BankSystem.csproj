@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6FAAEDBB-5718-43FD-99E7-A757666FC81D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>BankAccount</RootNamespace>
-    <AssemblyName>BankAccount</AssemblyName>
+    <ProjectGuid>{E2DE29F9-8754-4D23-AAD0-0F9C0688ABF8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BankSystem</RootNamespace>
+    <AssemblyName>BankSystem</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,17 +41,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="AccountService.cs" />
+    <Compile Include="AccountType.cs" />
     <Compile Include="BaseAccount.cs" />
     <Compile Include="GoldAccount.cs" />
-    <Compile Include="PersonAccount.cs" />
+    <Compile Include="IAccountService.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PlatinumAccount.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SilverAccount.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\GeneratorLogic\GeneratorLogic.csproj">
+      <Project>{32614a1c-29bc-4807-b63d-7c57f4657754}</Project>
+      <Name>GeneratorLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryLogic\RepositoryLogic.csproj">
+      <Project>{53305add-9fc2-49fe-9978-46284768e461}</Project>
+      <Name>RepositoryLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
