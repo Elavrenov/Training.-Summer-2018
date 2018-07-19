@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JaggedArrayBubbleSort.cs" />
+    <Compile Include="DelegateMethodJaggedArrayBubbleSort.cs" />
+    <Compile Include="InterfaceMethodJaggedArrayBubbleSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

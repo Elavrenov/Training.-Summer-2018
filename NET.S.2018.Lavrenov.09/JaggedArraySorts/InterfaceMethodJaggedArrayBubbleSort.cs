@@ -6,7 +6,7 @@
     /// <summary>
     /// Class for bubble sorting rows of jagged arrays with given comparision logic
     /// </summary>
-    public static class JaggedArrayBubbleSort
+    public static class InterfaceMethodJaggedArrayBubbleSort
     {
         #region Public API
 
@@ -30,13 +30,29 @@
                 throw new ArgumentNullException($"{nameof(condition)} can't be null");
             }
 
+            BubbleSort(array, condition.Compare);
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private static void Swap(ref int[] firstRow, ref int[] secondRow)
+        {
+            int[] temp = firstRow;
+            firstRow = secondRow;
+            secondRow = temp;
+        }
+
+        private static void BubbleSort(int[][] array, Comparison<int[]> comparison)
+        {
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 var isChanged = false;
 
                 for (int j = 0; j < array.GetLength(0) - 1; j++)
                 {
-                    if (condition.Compare(array[j], array[j + 1]) > 0)
+                    if (comparison(array[j], array[j + 1]) > 0)
                     {
                         Swap(ref array[j], ref array[j + 1]);
                         isChanged = true;
@@ -48,17 +64,6 @@
                     return;
                 }
             }
-        }
-
-        #endregion
-
-        #region Private API
-
-        private static void Swap(ref int[] firstRow, ref int[] secondRow)
-        {
-            int[] temp = firstRow;
-            firstRow = secondRow;
-            secondRow = temp;
         }
 
         #endregion
