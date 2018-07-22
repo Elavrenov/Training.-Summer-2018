@@ -15,6 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearch", "BinarySearc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearch.Tests", "BinarySearch.Tests\BinarySearch.Tests.csproj", "{3FEC7787-C90A-4A8E-B762-5EF37A0AEBA7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fibonacchi task", "Fibonacchi task", "{767F342A-89DE-43F9-BA2C-844D1D0CFEE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciNumbers", "FibonacciNumbers\FibonacciNumbers.csproj", "{76B6FDA8-3944-408E-BD97-464385BCDDE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci.Tests", "Fibonacci.Tests\Fibonacci.Tests.csproj", "{3D6D726C-8B03-47A8-9B00-CA98C6F0F6C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +43,14 @@ Global
 		{3FEC7787-C90A-4A8E-B762-5EF37A0AEBA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FEC7787-C90A-4A8E-B762-5EF37A0AEBA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FEC7787-C90A-4A8E-B762-5EF37A0AEBA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B6FDA8-3944-408E-BD97-464385BCDDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B6FDA8-3944-408E-BD97-464385BCDDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B6FDA8-3944-408E-BD97-464385BCDDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B6FDA8-3944-408E-BD97-464385BCDDE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D6D726C-8B03-47A8-9B00-CA98C6F0F6C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D6D726C-8B03-47A8-9B00-CA98C6F0F6C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D6D726C-8B03-47A8-9B00-CA98C6F0F6C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D6D726C-8B03-47A8-9B00-CA98C6F0F6C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +60,8 @@ Global
 		{90C42F24-149B-40B1-A40E-DB209F872C12} = {5EA0ADF4-ADC7-48B9-B2D4-65FD2F4CF452}
 		{2505D669-BC5A-4077-93BB-C446230E68BF} = {103F70B4-FE9E-4AE2-9224-878CC62D9AC7}
 		{3FEC7787-C90A-4A8E-B762-5EF37A0AEBA7} = {103F70B4-FE9E-4AE2-9224-878CC62D9AC7}
+		{76B6FDA8-3944-408E-BD97-464385BCDDE3} = {767F342A-89DE-43F9-BA2C-844D1D0CFEE3}
+		{3D6D726C-8B03-47A8-9B00-CA98C6F0F6C4} = {767F342A-89DE-43F9-BA2C-844D1D0CFEE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A2A9F5A-79FA-4BDD-B506-4009E57BFE78}
