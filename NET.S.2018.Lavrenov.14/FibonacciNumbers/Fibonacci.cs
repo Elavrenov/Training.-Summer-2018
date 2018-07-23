@@ -1,34 +1,47 @@
 ﻿namespace FibonacciNumbers
 {
+    using System.Collections.Generic;
+    using System.Numerics;
     using System;
     public static class Fibonacci
     {
+        #region Public API
+
         /// <summary>
         /// Method for searcing Fibonacci numbers
         /// </summary>
         /// <param name="amount">Digit of Fibonacci numbers</param>
-        /// <returns>Array with fixed digit Fibonacci numbers</returns>
+        /// <returns> IEnumerable BigInteger with fixed digit Fibonacci numbers</returns>
         /// <exception cref="ArgumentException">if <param name="amount"> less or equal zero</param></exception>
-        public static int[] GetFibonacci(int amount)
+        public static IEnumerable<BigInteger> GetFibonacci(int amount)
         {
             if (amount <= 0)
             {
-                throw new ArgumentException($"{amount} can't be less or equal zero");
+                throw new ArgumentException($"{amount} can't be less or equals zero");
             }
 
-            int[] fibArray = new int[amount];
-            fibArray[0] = 1;
-            int a = 0;
-
-            for (int i = 1; i < amount; i++)
-            {
-
-                int temp = fibArray[i - 1] + a;
-                a = fibArray[i - 1];
-                fibArray[i] = temp;
-            }
-
-            return fibArray;
+            return FibonacciGenerator(amount);
         }
+
+        #endregion
+
+        #region Private methods
+
+        private static IEnumerable<BigInteger> FibonacciGenerator(int n)
+        {
+            BigInteger current = 0;
+            BigInteger next = 1;
+
+            for (int i = 0; i < n; i++)
+            {
+                yield return current;
+
+                BigInteger temp = current + next;
+                current = next;
+                next = temp;
+            }
+        }
+
+        #endregion
     }
 }
