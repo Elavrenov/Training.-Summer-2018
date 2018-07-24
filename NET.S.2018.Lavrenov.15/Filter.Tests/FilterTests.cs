@@ -1,5 +1,7 @@
 ﻿namespace Filter.Tests
 {
+    using System;
+    using System.Numerics;
     using NUnit.Framework;
 
     [TestFixture]
@@ -37,6 +39,36 @@
             };
 
             CollectionAssert.AreEqual(expected, actual.Filtration(x => x.Contains("h")));
+        }
+
+        [TestCase(null)]
+        public void FilterArgumentNullExceptionTest1(int[] array)
+        {
+            Assert.Throws<ArgumentNullException>(() => array.Filtration(x => x > 0));
+        }
+
+        [TestCase(null)]
+        public void FilterArgumentNullExceptionTest2(string[] array)
+        {
+            Assert.Throws<ArgumentNullException>(() => array.Filtration(x => x.Contains("2")));
+        }
+
+        [TestCase(null)]
+        public void FilterArgumentNullExceptionTest3(BigInteger[] array)
+        {
+            Assert.Throws<ArgumentNullException>(() => array.Filtration(x => x > 0));
+        }
+
+        [TestCase(null)]
+        public void FilterArgumentNullExceptionTest4(BigInteger[] array)
+        {
+            Assert.Throws<ArgumentNullException>(() => array.Filtration(null));
+        }
+
+        [TestCase(new[] { 1, 2, 2 })]
+        public void FilterArgumentNullExceptionTest5(int[] array)
+        {
+            Assert.Throws<ArgumentNullException>(() => array.Filtration(null));
         }
     }
 }
