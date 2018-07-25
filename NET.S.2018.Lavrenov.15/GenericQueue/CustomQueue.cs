@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GenericQueue
+﻿namespace GenericQueue
 {
+    using System;
+    using System.Collections.Generic;
+
     public class CustomQueue<T>
     {
         #region Fields and prop
@@ -47,7 +43,7 @@ namespace GenericQueue
         /// </summary>
         public CustomQueue()
         {
-            _queueArray = new T[2];
+            _queueArray = new T[4];
         }
 
         /// <summary>
@@ -80,7 +76,7 @@ namespace GenericQueue
                 throw new ArgumentNullException($"{nameof(collection)} can't be null");
             }
 
-            _queueArray = new T[2];
+            _queueArray = new T[4];
             _queueSize = 0;
             Version = 0;
 
@@ -201,14 +197,14 @@ namespace GenericQueue
 
         public struct CustomIterator<T>
         {
-            private CustomQueue<T> _queue;
+            private readonly CustomQueue<T> _queue;
             private int _index;
             private readonly int _version;
 
             public CustomIterator(CustomQueue<T> queue)
             {
                 _queue = queue;
-                _index = -1;
+                _index = queue._queueHead - 1;
                 _version = _queue.Version;
             }
 
@@ -226,7 +222,7 @@ namespace GenericQueue
             {
                 get
                 {
-                    if (_index == -1 || _index == _queue.Count)
+                    if (_index == _queue._queueHead - 1 || _index == _queue.Count)
                     {
                         throw new InvalidOperationException($"Invalid operation");
                     }
@@ -242,7 +238,7 @@ namespace GenericQueue
                     throw new InvalidOperationException($"Wrong queue version");
                 }
 
-                _index = -1;
+                _index = _queue._queueHead - 1;
             }
         }
 
@@ -258,7 +254,17 @@ namespace GenericQueue
         {
             T[] newQueueArray = new T[capacity];
 
-            Array.Copy(_queueArray, _queueHead, newQueueArray, 0, _queueArray.Length - _queueHead);
+            if (_queueHead < _queueTail)
+            {
+                Array.Copy(_queueArray, _queueHead, newQueueArray, 0, _queueSize);
+
+            }
+            else
+            {
+                Array.Copy(_queueArray, _queueHead, newQueueArray, 0, _queueArray.Length - _queueHead);
+                Array.Copy(_queueArray, 0, newQueueArray, _queueArray.Length - _queueHead, _queueTail);
+            }
+
             _queueArray = newQueueArray;
             _queueHead = 0;
             _queueTail = _queueSize == capacity ? 0 : _queueSize;

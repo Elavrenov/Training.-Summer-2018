@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-
-namespace GenericQueue.Tests
+﻿namespace GenericQueue.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using NUnit.Framework;
+
     [TestFixture]
     public class GenericQueueTests
     {
@@ -31,37 +30,110 @@ namespace GenericQueue.Tests
         [Test]
         public void QueuesCountTest()
         {
-            Assert.AreEqual(queueInt1.Count, 0);
-            Assert.AreEqual(queueInt2.Count, 0);
-            Assert.AreEqual(queueInt3.Count, 7);
-            Assert.AreEqual(queueInt4.Count, 5);
-
             Assert.AreEqual(queueStr1.Count, 0);
             Assert.AreEqual(queueStr2.Count, 0);
             Assert.AreEqual(queueStr3.Count, 7);
             Assert.AreEqual(queueStr4.Count, 5);
 
-            Assert.AreEqual(queueCust1.Count, 0);
-            Assert.AreEqual(queueCust2.Count, 0);
-            Assert.AreEqual(queueCust3.Count, 2);
-            Assert.AreEqual(queueCust4.Count, 3);
+            Assert.AreEqual(queueInt1.Count, 0);
+            Assert.AreEqual(queueInt2.Count, 0);
+            Assert.AreEqual(queueInt4.Count, 5);
+        }
+
+        [TestCase("1")]
+        [TestCase("7")]
+        [TestCase("4")]
+        [TestCase("2")]
+        public void QueuesContainsTest1(string s)
+        {
+            if (queueStr3.Contains(s))
+            {
+                Assert.Pass();
+            }
+
+            Assert.Fail();
         }
 
         [Test]
-        public void EnqueueDequeueForeachTest()
+        public void QueuesContainsTest2()
         {
-            //queueInt3.Enqueue(3);
-            //queueInt3.Enqueue(2);
-            //queueInt3.Dequeque();
-
-            //int i = -1;
-            //int[] expected = new[] {0,2, 3, 4, 5, 6, 7, 3, 2};
-            queueCust3.Dequeque();
-
-            foreach (var item in queueCust3)
+            if (queueCust3.Contains(p1))
             {
-                Assert.AreEqual(item,2);
+                Assert.Pass();
             }
+
+            Assert.Fail();
+        }
+
+        [TestCase("WALLMART")]
+        [TestCase("qqq")]
+        [TestCase("11")]
+        [TestCase("8")]
+        public void QueuesNotContainsTest(string s)
+        {
+            if (queueStr3.Contains(s))
+            {
+                Assert.Fail();
+            }
+
+            Assert.Pass();
+        }
+
+        [Test]
+        public void EnqueueDequeueForeachTest1()
+        {
+            queueInt3.Enqueue(3);
+            queueInt3.Enqueue(2);
+            queueInt3.Dequeque();
+
+            int i = -1;
+            int[] expected = new[] { 2, 3, 4, 5, 6, 7, 3, 2 };
+
+            foreach (var item in queueInt3)
+            {
+                Assert.AreEqual(expected[++i], item);
+            }
+
+        }
+
+        [Test]
+        public void EnqueueDequeueForeachTest2()
+        {
+            queueCust4.Enqueue(p1);
+            queueCust4.Enqueue(p1);
+            queueCust4.Enqueue(p1);
+            queueCust4.Dequeque();
+
+            int i = -1;
+            Person[] expected = new[] { p2, p3, p1, p1, p1 };
+
+            foreach (var item in queueCust4)
+            {
+                Assert.AreEqual(expected[++i], item);
+            }
+        }
+
+        [Test]
+        public void QueueClearTest()
+        {
+            queueCust4.Clear();
+
+            if (queueCust4.Count == 0)
+            {
+                Assert.Pass();
+            }
+
+            Assert.Fail();
+        }
+
+        [Test]
+        public void ExceptionTest()
+        {
+            Assert.Throws<ArgumentException>(() => new CustomQueue<string>(-1));
+            Assert.Throws<ArgumentNullException>(() => new CustomQueue<Person>(null));
+            Assert.Throws<ArgumentException>(() => new CustomQueue<int>(-1));
+            Assert.Throws<ArgumentException>(() => queueCust1.Dequeque());
+            Assert.Throws<ArgumentException>(() => queueCust2.Peek());
         }
     }
 }
