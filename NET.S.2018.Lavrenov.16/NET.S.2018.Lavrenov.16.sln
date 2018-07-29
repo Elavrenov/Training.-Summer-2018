@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchTree", "BinaryS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchTree.Tests", "BinarySearchTree.Tests\BinarySearchTree.Tests.csproj", "{B910D428-840C-446A-BA7A-A3758658CC69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficLight", "TrafficLight\TrafficLight.csproj", "{F549C5E4-56AF-4E5B-808A-FCAEC8CEEA19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficLightPL", "TrafficLightPL\TrafficLightPL.csproj", "{558812C8-BCAD-43A9-9339-BDD960303DF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B910D428-840C-446A-BA7A-A3758658CC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B910D428-840C-446A-BA7A-A3758658CC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B910D428-840C-446A-BA7A-A3758658CC69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F549C5E4-56AF-4E5B-808A-FCAEC8CEEA19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F549C5E4-56AF-4E5B-808A-FCAEC8CEEA19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F549C5E4-56AF-4E5B-808A-FCAEC8CEEA19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F549C5E4-56AF-4E5B-808A-FCAEC8CEEA19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{558812C8-BCAD-43A9-9339-BDD960303DF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{558812C8-BCAD-43A9-9339-BDD960303DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{558812C8-BCAD-43A9-9339-BDD960303DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{558812C8-BCAD-43A9-9339-BDD960303DF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
