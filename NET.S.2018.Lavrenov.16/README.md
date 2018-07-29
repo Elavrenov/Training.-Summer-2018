@@ -10,8 +10,10 @@
 (использовать сравнение по умолчанию и подключаемый компаратор);
 -пользовательскую структуру Point, для объектов которого не реализовано отношения порядка 
 (использовать подключаемый компаратор).
-[View](\NET.S.2018.Lavrenov.16\BinarySearchTree) [Tests](\NET.S.2018.Lavrenov.16\BinarySearchTree.Tests)
+[View](https://github.com/Elavrenov/Training.-Summer-2018/tree/master/NET.S.2018.Lavrenov.16/BinarySearchTree) 
+[Tests](https://github.com/Elavrenov/Training.-Summer-2018/tree/master/NET.S.2018.Lavrenov.16/BinarySearchTree.Tests)
 
 2. * (deadline - 27.07.2018, 24.00) Предложить различные способы (2-3 способа) 
 описания класса TrafficLight (Светофор) для системы управления различными светофорами, соответствующий принципам ООП.
-[View](\NET.S.2018.Lavrenov.16\TrafficLight) [Console](\NET.S.2018.Lavrenov.16\TrafficLightPL)
+[View](https://github.com/Elavrenov/Training.-Summer-2018/tree/master/NET.S.2018.Lavrenov.16/TrafficLight)
+[Console](https://github.com/Elavrenov/Training.-Summer-2018/tree/master/NET.S.2018.Lavrenov.16/TrafficLightPL)
