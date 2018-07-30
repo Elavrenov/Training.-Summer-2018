@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrices", "GenericMatrices\GenericMatrices.csproj", "{CC6FAF55-8E33-459E-AA35-6CF0204CDD1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrices.Tests", "GenericMatrices.Tests\GenericMatrices.Tests.csproj", "{57D02951-AAC4-4D6D-9F93-FBBFDC957A6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC6FAF55-8E33-459E-AA35-6CF0204CDD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6FAF55-8E33-459E-AA35-6CF0204CDD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6FAF55-8E33-459E-AA35-6CF0204CDD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6FAF55-8E33-459E-AA35-6CF0204CDD1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D02951-AAC4-4D6D-9F93-FBBFDC957A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D02951-AAC4-4D6D-9F93-FBBFDC957A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D02951-AAC4-4D6D-9F93-FBBFDC957A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D02951-AAC4-4D6D-9F93-FBBFDC957A6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65C31C23-D468-45AB-9CD7-0AB4669225C6}
+	EndGlobalSection
+EndGlobal
