@@ -79,7 +79,7 @@
                 throw new ArgumentOutOfRangeException($"{nameof(i)},{nameof(j)} wrong indexes");
             }
 
-            protected set
+            set
             {
                 if (i < Matrix.GetLength(0) && j < Matrix.GetLength(1))
                 {
@@ -115,9 +115,9 @@
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < this.Order; i++)
+            for (int i = 0; i < Order; i++)
             {
-                for (int j = 0; j < this.Order; j++)
+                for (int j = 0; j < Order; j++)
                 {
                     yield return Matrix[i, j];
                 }

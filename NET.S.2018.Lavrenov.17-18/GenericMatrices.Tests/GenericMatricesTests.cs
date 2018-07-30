@@ -80,5 +80,12 @@
             CollectionAssert.AreEqual(new SquareMatrix<int>(expected1), lhs.Add(rhs, (x, y) => x + y));
             CollectionAssert.AreEqual(new SquareMatrix<int>(expected2), lhs.Add(rhs, (x, y) => x - y));
         }
+
+        [TestCase(ExpectedResult = 1)]
+        public int GetMatrixTest()
+        {
+            SquareMatrix<int> squareMatrix = new SquareMatrix<int>(_intArr2);
+            return squareMatrix[1, 1];
+        }
     }
 }

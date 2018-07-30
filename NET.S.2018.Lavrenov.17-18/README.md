@@ -5,3 +5,5 @@
  у которой элементы вне главной диагонали имеют значения по умолчанию типа элемента). 
  Описать в созданных классах событие, которое происходит при изменении элемента матрицы с индексами (i, j). Расширить функциональность существующей иерархии классов,
  добавив возможность операции сложения двух матриц любого типа. Разработать unit-тесты.
+[View](https://github.com/Elavrenov/Training.-Summer-2018/tree/master/NET.S.2018.Lavrenov.17-18/GenericMatrices)
+[Tests](https://github.com/Elavrenov/Training.-Summer-2018/tree/master/NET.S.2018.Lavrenov.17-18/GenericMatrices.Tests)
