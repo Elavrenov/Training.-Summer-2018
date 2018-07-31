@@ -1,4 +1,6 @@
-﻿namespace GenericMatrices
+﻿using System.Linq.Expressions;
+
+namespace GenericMatrices
 {
     using System;
 
@@ -17,7 +19,7 @@
         /// <returns>new square matrix which is sum of two matrices</returns>
         /// <exception cref="ArgumentException"><param name="lhs"><param name="rhs"> can't be null</param></param></exception>
         /// <exception cref="ArithmeticException">It's not possible to add 2 matrices with different dimmension</exception>
-        public static SquareMatrix<T> Add<T>(this SquareMatrix<T> lhs, SquareMatrix<T> rhs, Func<T, T, T> addFunc)
+        public static AbstractSquareMatrix<T> Add<T>(this AbstractSquareMatrix<T> lhs, AbstractSquareMatrix<T> rhs)
         {
             if (lhs == null || rhs == null)
             {
@@ -29,17 +31,32 @@
                 throw new ArithmeticException($"Matrices has non-equal order");
             }
 
-            var answer = new T[lhs.Order,lhs.Order];
+            var answer = new T[lhs.Order, lhs.Order];
 
             for (int i = 0; i < lhs.Order; i++)
             {
                 for (int j = 0; j < lhs.Order; j++)
                 {
-                    answer[i, j] = addFunc(lhs[i, j], rhs[i, j]);
+                    answer[i, j] = AddFunc((dynamic)lhs[i, j], rhs[i, j]);
                 }
             }
 
             return new SquareMatrix<T>(answer);
         }
+
+        #region private methods
+
+        private static T AddFunc<T>(T lhs, T rhs)
+        {
+            ParameterExpression paramLeft = Expression.Parameter(typeof(T), "lhs");
+            ParameterExpression paramRight = Expression.Parameter(typeof(T), "rhs");
+            BinaryExpression body = Expression.Add(paramLeft, paramRight);
+
+            Func<T, T, T> add = Expression.Lambda<Func<T, T, T>>(body, paramLeft, paramRight).Compile();
+
+            return add(lhs, rhs);
+        }
+
+        #endregion
     }
 }

@@ -7,24 +7,24 @@
     [TestFixture]
     public class GenericQueueTests
     {
-        private CustomQueue<int> queueInt1 = new CustomQueue<int>();
-        private CustomQueue<int> queueInt2 = new CustomQueue<int>(3);
-        private CustomQueue<int> queueInt3 = new CustomQueue<int>(new[] { 1, 2, 3, 4, 5, 6, 7 });
-        private CustomQueue<int> queueInt4 = new CustomQueue<int>(new List<int>(new[] { 1, 2, 3, 4, 5 }));
+        private TQueue<int> queueInt1 = new TQueue<int>();
+        private TQueue<int> queueInt2 = new TQueue<int>(3);
+        private TQueue<int> queueInt3 = new TQueue<int>(new[] { 1, 2, 3, 4, 5, 6, 7 });
+        private TQueue<int> queueInt4 = new TQueue<int>(new List<int>(new[] { 1, 2, 3, 4, 5 }));
 
-        private CustomQueue<string> queueStr1 = new CustomQueue<string>();
-        private CustomQueue<string> queueStr2 = new CustomQueue<string>(3);
-        private CustomQueue<string> queueStr3 = new CustomQueue<string>(new[] { "1", "2", "3", "4", "5", "6", "7" });
-        private CustomQueue<string> queueStr4 = new CustomQueue<string>(new List<string>(new[] { "1", "2", " 3", "4", "5" }));
+        private TQueue<string> queueStr1 = new TQueue<string>();
+        private TQueue<string> queueStr2 = new TQueue<string>(3);
+        private TQueue<string> queueStr3 = new TQueue<string>(new[] { "1", "2", "3", "4", "5", "6", "7" });
+        private TQueue<string> queueStr4 = new TQueue<string>(new List<string>(new[] { "1", "2", " 3", "4", "5" }));
 
         static Person p1 = new Person("Ivan", 25);
         static Person p2 = new Person("Ray", 1);
         static Person p3 = new Person("Falcona", 222);
 
-        private CustomQueue<Person> queueCust1 = new CustomQueue<Person>();
-        private CustomQueue<Person> queueCust2 = new CustomQueue<Person>(3);
-        private CustomQueue<Person> queueCust3 = new CustomQueue<Person>(new Person[] { p1, p2 });
-        private CustomQueue<Person> queueCust4 = new CustomQueue<Person>(new List<Person>(new Person[] { p1, p2, p3 }));
+        private TQueue<Person> queueCust1 = new TQueue<Person>();
+        private TQueue<Person> queueCust2 = new TQueue<Person>(3);
+        private TQueue<Person> queueCust3 = new TQueue<Person>(new Person[] { p1, p2 });
+        private TQueue<Person> queueCust4 = new TQueue<Person>(new List<Person>(new Person[] { p1, p2, p3 }));
 
 
         [Test]
@@ -129,9 +129,9 @@
         [Test]
         public void ExceptionTest()
         {
-            Assert.Throws<ArgumentException>(() => new CustomQueue<string>(-1));
-            Assert.Throws<ArgumentNullException>(() => new CustomQueue<Person>(null));
-            Assert.Throws<ArgumentException>(() => new CustomQueue<int>(-1));
+            Assert.Throws<ArgumentException>(() => new TQueue<string>(-1));
+            Assert.Throws<ArgumentNullException>(() => new TQueue<Person>(null));
+            Assert.Throws<ArgumentException>(() => new TQueue<int>(-1));
             Assert.Throws<ArgumentException>(() => queueCust1.Dequeque());
             Assert.Throws<ArgumentException>(() => queueCust2.Peek());
         }

@@ -1,46 +1,40 @@
 ﻿using System;
 namespace GenericMatrices
 {
-    public sealed class DiagonalMatrix<T> : SquareMatrix<T>
+    public sealed class DiagonalMatrix<T> : AbstractSquareMatrix<T>
     {
-        public DiagonalMatrix(int size) : base(size)
+        private readonly T[] _matrix;
+
+        public DiagonalMatrix(int size):base(size)
         {
+            _matrix = new T[size];
+        }
+
+        public DiagonalMatrix(T[,] matrix):base(matrix)
+        {
+            _matrix=new T[this.Order];
+
             for (int i = 0; i < Order; i++)
             {
-                for (int j = 0; j < Order; j++)
-                {
-                    if (i != j)
-                    {
-                        Matrix[i, j] = default(T);
-                    }
-                }
+                _matrix[i] = matrix[i, i];
             }
         }
 
-        public DiagonalMatrix(T[,] matrix) : base(matrix)
-        {
-            if (!IsValidMatrixType())
-            {
-                throw new ArgumentException($"{nameof(matrix)} is not diagonal");
-            }
-        }
-        protected override bool IsValidMatrixType()
-        {
-            for (int i = 0; i < Order; i++)
-            {
-                for (int j = 0; j < Order; j++)
-                {
-                    if (i != j)
-                    {
-                        if (!Equals(Matrix[i, j], default(T)))
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
+        #region Overrided abstract methods
 
-            return true;
+        protected override T GetValue(int i, int j)
+        {
+            return i == j ? _matrix[i] : default(T);
         }
+
+        protected override void SetValue(T value, int i, int j)
+        {
+            if (i == j)
+            {
+                _matrix[i] = value;
+            }
+        }
+
+        #endregion
     }
 }

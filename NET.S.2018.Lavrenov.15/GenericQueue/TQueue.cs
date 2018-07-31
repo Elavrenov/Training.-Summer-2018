@@ -1,9 +1,10 @@
 ﻿namespace GenericQueue
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
-    public class CustomQueue<T>
+    public class TQueue<T> : IEnumerable<T>
     {
         #region Fields and prop
 
@@ -12,11 +13,11 @@
         /// </summary>
         private T[] _queueArray;
         /// <summary>
-        /// Queue head index
+        /// TQueue head index
         /// </summary>
         private int _queueHead;
         /// <summary>
-        /// Queue tail index
+        /// TQueue tail index
         /// </summary>
         private int _queueTail;
         /// <summary>
@@ -25,7 +26,7 @@
         private int _queueSize;
 
         /// <summary>
-        /// Queue version
+        /// TQueue version
         /// </summary>
         public int Version { get; private set; }
 
@@ -41,7 +42,7 @@
         /// <summary>
         /// Default ctor
         /// </summary>
-        public CustomQueue()
+        public TQueue()
         {
             _queueArray = new T[4];
         }
@@ -51,7 +52,7 @@
         /// </summary>
         /// <param name="capacity"></param>
         /// <exception cref="ArgumentException">capacity must be greater than zero</exception>
-        public CustomQueue(int capacity)
+        public TQueue(int capacity)
         {
             if (capacity < 0)
             {
@@ -69,7 +70,7 @@
         /// </summary>
         /// <param name="collection">IEnumerable item</param>
         /// <exception cref="ArgumentNullException">if collection is null</exception>
-        public CustomQueue(IEnumerable<T> collection)
+        public TQueue(IEnumerable<T> collection)
         {
             if (collection == null)
             {
@@ -186,22 +187,34 @@
 
         #region IEnumerable <T>
 
-        public CustomIterator<T> GetEnumerator()
+        public CustomIterator GetEnumerator()
         {
-            return new CustomIterator<T>(this);
+            return new CustomIterator(this);
+        }
+
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return GetEnumerator();
+
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         #endregion
 
         #region Iterator
 
-        public struct CustomIterator<T>
+        public struct CustomIterator : IEnumerator<T>
         {
-            private readonly CustomQueue<T> _queue;
+            private readonly TQueue<T> _queue;
             private int _index;
             private readonly int _version;
 
-            public CustomIterator(CustomQueue<T> queue)
+            public CustomIterator(TQueue<T> queue)
             {
                 _queue = queue;
                 _index = queue._queueHead - 1;
@@ -239,6 +252,13 @@
                 }
 
                 _index = _queue._queueHead - 1;
+            }
+
+            object IEnumerator.Current => Current;
+
+            public void Dispose()
+            {
+                //
             }
         }
 

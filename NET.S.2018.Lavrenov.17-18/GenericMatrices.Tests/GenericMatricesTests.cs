@@ -38,30 +38,12 @@
         };
 
         [Test]
-        public void ExceptionsIntMatrixTests()
-        {
-            Assert.Throws<ArgumentException>(() => new SquareMatrix<int>(-1));
-            Assert.Throws<ArgumentException>(() => new DiagonalMatrix<int>(-1));
-            Assert.Throws<ArgumentException>(() => new SymmetricMatrix<int>(-1));
-            Assert.Throws<ArgumentException>(() => new DiagonalMatrix<int>(_intArr3));
-            Assert.Throws<ArgumentException>(() => new SymmetricMatrix<int>(_intArr4));
-        }
-
-        [Test]
-        public void CtorTests()
-        {
-            SymmetricMatrix<int> sym = new SymmetricMatrix<int>(_intArr3);
-            DiagonalMatrix<int> dim = new DiagonalMatrix<int>(_intArr2);
-            Assert.Pass();
-        }
-
-        [Test]
-        public void AdditionMatricesTests()
+        public void AdditionMatricesTests1()
         {
             SquareMatrix<int> lhs = new SquareMatrix<int>(_intArr1);
             DiagonalMatrix<int> rhs = new DiagonalMatrix<int>(_intArr2);
 
-            int[,] expected1 = new int[,]
+            int[,] expected = new int[,]
             {
                 { 2,1,1,1},
                 { 1,2,1,1},
@@ -69,23 +51,38 @@
                 { 1,1,1,2}
             };
 
-            int[,] expected2 = new int[,]
-            {
-                { 0,1,1,1},
-                { 1,0,1,1},
-                { 1,1,0,1},
-                { 1,1,1,0}
-            };
-
-            CollectionAssert.AreEqual(new SquareMatrix<int>(expected1), lhs.Add(rhs, (x, y) => x + y));
-            CollectionAssert.AreEqual(new SquareMatrix<int>(expected2), lhs.Add(rhs, (x, y) => x - y));
+            CollectionAssert.AreEqual(new SquareMatrix<int>(expected), lhs.Add(rhs));
         }
 
         [TestCase(ExpectedResult = 1)]
-        public int GetMatrixTest()
+        public int GetMatrixTest1()
         {
             SquareMatrix<int> squareMatrix = new SquareMatrix<int>(_intArr2);
             return squareMatrix[1, 1];
+        }
+
+        [TestCase(ExpectedResult = 0)]
+        public int GetMatrixTest2()
+        {
+            SymmetricMatrix<int> sym = new SymmetricMatrix<int>(_intArr3);
+            return sym[3, 3];
+        }
+
+        [Test]
+        public void AdditionMatricesTests2()
+        {
+            SymmetricMatrix<int> lhs = new SymmetricMatrix<int>(_intArr3);
+            DiagonalMatrix<int> rhs =new DiagonalMatrix<int>(_intArr2);
+
+            int[,] expected = new int[,]
+            {
+                { 1,1,1,0},
+                { 1,1,1,1},
+                { 1,1,2,1},
+                { 0,1,1,2}
+            };
+
+            CollectionAssert.AreEqual(new SquareMatrix<int>(expected), lhs.Add(rhs));
         }
     }
 }
