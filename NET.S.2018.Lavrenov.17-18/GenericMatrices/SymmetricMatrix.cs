@@ -15,20 +15,18 @@
 
         public SymmetricMatrix(int size) : base(size)
         {
-            _matrix = new T[(size * size - size) / 2 + size];
+            _matrix = new T[size * size];
         }
 
         public SymmetricMatrix(T[,] matrix) : base(matrix)
         {
-            _matrix = new T[(Order * Order - Order) / 2 + Order];
-
-            int k = 0;
+            _matrix = new T[Order * Order];
 
             for (int i = 0; i < Order; i++)
             {
-                for (int j = 0; j + i < Order; j++)
+                for (int j = i; j < Order; j++)
                 {
-                    _matrix[k++] = matrix[i, j + i];
+                    _matrix[GetIndex(i, j)] = matrix[i, j];
                 }
             }
         }
@@ -38,27 +36,39 @@
 
         protected override T GetValue(int i, int j)
         {
-            if (i == 0 || j == 0)
-            {
-                return _matrix[i + j];
-            }
-
-            return _matrix[i + j + 1];
+            return _matrix[GetIndex(i, j)];
         }
 
         protected override void SetValue(T value, int i, int j)
         {
-            if (i == 0 || j == 0)
-            {
-                _matrix[j + i] = value;
-            }
-            else
-            {
-                _matrix[i + j + 1] = value;
-            }
+            _matrix[GetIndex(i, j)] = value;
         }
 
         #endregion
 
+        #region Private method
+
+        private int GetIndex(int i, int j)
+        {
+            int index = 0;
+            for (int k = 0; k < Order; k++)
+            {
+                for (int z = k; z < Order; z++)
+                {
+                    if ((i == k) && (j == z))
+                    {
+                        return index;
+                    }
+
+                    index++;
+                }
+            }
+
+            return index;
+        }
+
     }
+
+    #endregion
 }
+

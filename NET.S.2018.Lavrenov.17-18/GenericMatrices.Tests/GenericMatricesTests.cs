@@ -24,8 +24,8 @@
         private readonly int[,] _intArr3 = new int[,]
         {
             { 0,1,1,0},
-            { 1,1,1,1},
-            { 1,1,1,1},
+            { 0,1,1,0},
+            { 0,1,1,0},
             { 0,1,1,0}
         };
 
@@ -77,9 +77,9 @@
             int[,] expected = new int[,]
             {
                 { 1,1,1,0},
-                { 1,1,1,1},
-                { 1,1,2,1},
-                { 0,1,1,2}
+                { 0,2,1,0},
+                { 0,0,2,0},
+                { 0,0,0,1}
             };
 
             CollectionAssert.AreEqual(new SquareMatrix<int>(expected), lhs.Add(rhs));
