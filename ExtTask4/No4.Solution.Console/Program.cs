@@ -10,14 +10,11 @@ namespace No4.Solution.Console
     {
         static void Main(string[] args)
         {
-            IGenerator byteGenerator = new RndBytesFileGen();
-            IGenerator charGenerator = new RndCharsFileGen();
+            RndBytesFileGenerator fileFileGenerator = new RndBytesFileGenerator();
+            RndCharsFileGenerator charsFileGenerator = new RndCharsFileGenerator();
 
-            Service serv1 = new Service(byteGenerator);
-            Service serv2 = new Service(charGenerator);
-
-            serv1.GenerateFiles(1,3);
-            serv2.GenerateFiles(2,4);
+            fileFileGenerator.GenerateFiles(1,2);
+            charsFileGenerator.GenerateFiles(3,4);
         }
     }
 }

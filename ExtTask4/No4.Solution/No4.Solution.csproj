@@ -40,12 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IGenerator.cs" />
-    <Compile Include="IServise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RndBytesFileGen.cs" />
-    <Compile Include="RndCharsFileGen.cs" />
-    <Compile Include="Service.cs" />
+    <Compile Include="RandomFileGenerator.cs" />
+    <Compile Include="RndBytesFileGenerator.cs" />
+    <Compile Include="RndCharsFileGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

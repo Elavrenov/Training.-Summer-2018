@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace No1.Solution
 {
-    public class PasswordCheckerService : IService
+    public class PasswordCheckerService
     {
         private readonly IRepository _repository;
 
@@ -15,30 +15,26 @@ namespace No1.Solution
             _repository = repository;
         }
 
-        public Tuple<bool, string> VerifyPassword(string password, Func<string, string, bool> func = null
-        , string veryfyingString = null)
+        public bool VerifyPassword(string password, IEnumerable<Tuple<bool, string>> tuples = null)
         {
-            if (func == null && veryfyingString == null)
+            if (string.IsNullOrEmpty(password))
             {
-                return DefaultVerify(password);
+                throw new ArgumentException($"wrong password");
             }
 
-            if (veryfyingString == null)
+            if (tuples != null)
             {
-                throw new ArgumentNullException(nameof(veryfyingString));
-            }
-
-            if (func != null)
-            {
-                if (func(password,veryfyingString))
+                foreach (var tuple in tuples)
                 {
-                    _repository.Create(password);
-                }
+                    if (!tuple.Item1)
+                    {
+                        return false;
+                    }
 
-                return Tuple.Create(func(password, veryfyingString), password);
+                }
             }
 
-            return DefaultVerify(password);
+            return true;
         }
 
         private Tuple<bool, string> DefaultVerify(string password)

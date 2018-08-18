@@ -10,11 +10,25 @@ namespace No2.Solution.Console
     {
         static void Main(string[] args)
         {
-            WeatherData weatherData = new WeatherData();
-            weatherData.Register(new CurrentConditionsReport());
-            weatherData.Register(new StatisticReport());
-            weatherData.Register(new ForeCastReport());
-            weatherData.MeasurementsChange(12, 23, 567);
+            WeatherDataManager dataManager = new WeatherDataManager();
+
+            CurrentConditionReport sub1 = new CurrentConditionReport();
+            ForeCastReport sub2 = new ForeCastReport();
+            StatisticReport sub3 = new StatisticReport(); ;
+
+            sub1.Register(dataManager);
+
+            dataManager.WeatherChange(100, 200, 300);
+
+            sub2.Register(dataManager);
+            sub3.Register(dataManager);
+
+            dataManager.WeatherChange(100,200,300);
+
+            sub2.Unregister(dataManager);
+            dataManager.WeatherChange(100, 200, 300);
+
+            System.Console.ReadKey();
         }
     }
 }

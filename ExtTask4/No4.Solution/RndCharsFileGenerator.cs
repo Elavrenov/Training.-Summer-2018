@@ -7,24 +7,11 @@ using System.Threading.Tasks;
 
 namespace No4.Solution
 {
-    public class RndCharsFileGen : IGenerator
+    public class RndCharsFileGenerator : RandomFileGenerator
     {
-        public string WorkingDirectory => "Files with random chars";
-
-        public string FileExtension => ".txt";
-        void IGenerator.GenerateFiles(int filesCount, int contentLength)
-        {
-            for (var i = 0; i < filesCount; ++i)
-            {
-                var generatedFileContent = this.GenerateFileContent(contentLength);
-
-                var generatedFileName = $"{Guid.NewGuid()}{this.FileExtension}";
-
-                this.WriteBytesToFile(generatedFileName, generatedFileContent);
-            }
-        }
-
-        private byte[] GenerateFileContent(int contentLength)
+        public override string WorkingDirectory => "Files with random chars";
+        public override string FileExtension => ".txt";
+        protected override byte[] GenerateFileContent(int contentLength)
         {
             var generatedString = this.RandomString(contentLength);
 
@@ -43,8 +30,7 @@ namespace No4.Solution
 
             return new string(chars.ToArray());
         }
-
-        private void WriteBytesToFile(string fileName, byte[] content)
+        protected override void WriteBytesToFile(string fileName, byte[] content)
         {
             if (!Directory.Exists(WorkingDirectory))
             {
